@@ -37,7 +37,7 @@
       "yarn fix:format"
     ],
     "next/**/*.{js,jsx,ts,tsx}": [
-      "cd next && yarn lint --fix"
+      "node scripts/lint-next.js"
     ]
   }
 }

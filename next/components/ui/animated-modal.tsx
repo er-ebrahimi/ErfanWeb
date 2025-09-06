@@ -196,6 +196,8 @@ const CloseIcon = () => {
     <button
       onClick={() => setOpen(false)}
       className="absolute top-4 right-4 group"
+      title="Close modal"
+      aria-label="Close modal"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

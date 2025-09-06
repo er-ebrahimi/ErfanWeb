@@ -64,6 +64,9 @@ export default function AddToCartModal({ onClick }: { onClick: () => void }) {
                     }}
                     min="1"
                     step="1"
+                    placeholder="Qty"
+                    title="Quantity"
+                    aria-label={`Quantity for ${item.product.name}`}
                     className="w-16 p-2 h-full rounded-md focus:outline-none bg-neutral-50 border border-neutral-100 focus:bg-neutral-100 text-black mr-4"
                     style={{
                       WebkitAppearance: 'none',
@@ -73,7 +76,11 @@ export default function AddToCartModal({ onClick }: { onClick: () => void }) {
                   <div className="text-black text-sm font-medium w-20">
                     ${formatNumber(item.product.price)}
                   </div>
-                  <button onClick={() => removeFromCart(item.product.id)}>
+                  <button
+                    onClick={() => removeFromCart(item.product.id)}
+                    title="Remove item from cart"
+                    aria-label="Remove item from cart"
+                  >
                     <IconTrash className="w-4 h-4 text-neutral-900" />
                   </button>
                 </div>

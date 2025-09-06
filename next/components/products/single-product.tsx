@@ -50,6 +50,8 @@ export const SingleProduct = ({ product }: { product: Product }) => {
                 <button
                   onClick={() => setActiveThumbnail(strapiImage(image.url))}
                   key={'product-image' + index}
+                  title={`View product image ${index + 1}`}
+                  aria-label={`View product image ${index + 1}`}
                   className={cn(
                     'h-20 w-20 rounded-xl',
                     activeThumbnail === image

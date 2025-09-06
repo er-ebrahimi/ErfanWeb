@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_dynamic_zone_contacts",
+  "info": {
+    "displayName": "Contact",
+    "icon": "command"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    }
+  }
+}

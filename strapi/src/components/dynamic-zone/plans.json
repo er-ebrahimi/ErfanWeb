@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_dynamic_zone_plans",
+  "info": {
+    "displayName": "Plans",
+    "icon": "oneToOne",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Plan": {
+      "displayName": "Plan",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.plan"
+    }
+  }
+}

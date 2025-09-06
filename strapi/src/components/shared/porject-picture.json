@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_shared_porject_pictures",
+  "info": {
+    "displayName": "Porject Picture",
+    "icon": "expand",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "ClassName": {
+      "type": "text"
+    },
+    "Top": {
+      "type": "string"
+    },
+    "Rotate": {
+      "type": "string"
+    },
+    "Right": {
+      "type": "string"
+    }
+  }
+}

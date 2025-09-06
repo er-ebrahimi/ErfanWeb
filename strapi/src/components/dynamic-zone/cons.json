@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_dynamic_zone_cons",
+  "info": {
+    "displayName": "Cons",
+    "icon": "fileError",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Cons": {
+      "displayName": "Cons",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.cons"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    }
+  }
+}

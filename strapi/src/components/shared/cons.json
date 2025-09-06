@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_cons",
+  "info": {
+    "displayName": "Cons",
+    "icon": "fileError"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}

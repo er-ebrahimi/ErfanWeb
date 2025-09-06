@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_plans",
+  "info": {
+    "displayName": "Plan",
+    "icon": "connector"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Pictrue": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

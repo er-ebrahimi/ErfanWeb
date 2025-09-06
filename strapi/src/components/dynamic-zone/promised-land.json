@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_dynamic_zone_promised_lands",
+  "info": {
+    "displayName": "Promised Land",
+    "icon": "crown",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Promise": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.promise"
+    }
+  }
+}

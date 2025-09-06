@@ -43,6 +43,7 @@ export default async function fetchContentType(
     }
 
     // Construct the full URL for the API request
+    console.log('🚀 ~ fetchContentType ~ contentType:', contentType);
     const url = new URL(`api/${contentType}`, process.env.NEXT_PUBLIC_API_URL);
 
     // Perform the fetch request with the provided query parameters
@@ -52,9 +53,19 @@ export default async function fetchContentType(
     });
 
     if (!response.ok) {
+      let errorDetails = '';
+      try {
+        const errorBody = await response.text();
+        errorDetails = errorBody;
+      } catch (e) {
+        errorDetails = 'Unable to read error response';
+      }
+
       console.error(
         `Failed to fetch data from Strapi (url=${url.toString()}, status=${response.status})`
       );
+      console.error('Error details:', errorDetails);
+
       // Return appropriate fallback based on expected data structure
       return spreadData ? null : { data: [] };
     }

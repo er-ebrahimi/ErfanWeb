@@ -19,9 +19,12 @@ export async function BlogLayout({
   return (
     <Container className="mt-16 lg:mt-32">
       <div className="flex justify-between items-center px-2 py-8">
-        <Link href="/blog" className="flex space-x-2 items-center">
-          <IconArrowLeft className="w-4 h-4 text-muted" />
-          <span className="text-sm text-muted">Back</span>
+        <Link
+          href="/blog"
+          className="flex space-x-2 items-center hover:text-foreground transition-colors"
+        >
+          <IconArrowLeft className="w-4 h-4 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">Back</span>
         </Link>
       </div>
       <div className="w-full mx-auto">
@@ -34,7 +37,7 @@ export async function BlogLayout({
             alt={article.title}
           />
         ) : (
-          <div className="h-40 md:h-96 w-full aspect-squace rounded-3xl shadow-derek bg-neutral-900 flex items-center justify-center">
+          <div className="h-40 md:h-96 w-full aspect-squace rounded-3xl shadow-derek bg-card flex items-center justify-center">
             {/* <Logo /> */}
           </div>
         )}
@@ -46,19 +49,21 @@ export async function BlogLayout({
               {article.categories?.map((category, idx) => (
                 <p
                   key={`category-${idx}`}
-                  className="text-xs font-bold text-muted px-2 py-1 rounded-full bg-neutral-800 capitalize"
+                  className="text-xs font-bold text-primary-foreground px-2 py-1 rounded-full bg-primary capitalize"
                 >
                   {category.name}
                 </p>
               ))}
             </div>
             <header className="flex flex-col">
-              <h1 className="mt-8 text-4xl font-bold tracking-tight text-neutral-200 sm:text-5xl ">
+              <h1 className="mt-8 text-4xl font-bold tracking-tight text-foreground sm:text-5xl ">
                 {article.title}
               </h1>
             </header>
-            <div className="mt-8 prose prose-sm prose-invert">{children}</div>
-            <div className="flex space-x-2 items-center pt-12 border-t border-neutral-800 mt-12">
+            <div className="mt-8 prose prose-sm dark:prose-invert prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-li:text-foreground prose-a:text-primary hover:prose-a:text-primary/80">
+              {children}
+            </div>
+            <div className="flex space-x-2 items-center pt-12 border-t border-border mt-12">
               <div className="flex space-x-2 items-center ">
                 {/* <StrapiImage 
                   src={article.authorAvatar}
@@ -71,12 +76,12 @@ export async function BlogLayout({
                   {article.author}
                 </p> */}
               </div>
-              <div className="h-5 rounded-lg w-0.5 bg-neutral-700" />
+              <div className="h-5 rounded-lg w-0.5 bg-border" />
               <time
                 dateTime={article.publishedAt}
                 className="flex items-center text-base "
               >
-                <span className="text-muted text-sm">
+                <span className="text-muted-foreground text-sm">
                   {format(new Date(article.publishedAt), 'MMMM dd, yyyy')}
                 </span>
               </time>

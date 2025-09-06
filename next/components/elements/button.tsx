@@ -20,25 +20,25 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const variantClass =
-    variant === 'simple'
-      ? 'bg-secondary relative z-10 bg-transparent hover:border-secondary/50 hover:bg-secondary/10  border border-transparent text-white text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center'
-      : variant === 'outline'
-        ? 'bg-white relative z-10 hover:bg-secondary/90 hover:shadow-xl  text-black border border-black hover:text-black text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center'
-        : variant === 'primary'
-          ? 'bg-secondary relative z-10 hover:bg-secondary/90  border border-secondary text-black text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF60_inset,_0px_1px_0px_0px_#FFFFFF60_inset  hover:-translate-y-1 active:-translate-y-0'
-          : variant === 'muted'
-            ? 'bg-neutral-800 relative z-10 hover:bg-neutral-900  border border-transparent text-white text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center shadow-[0px_1px_0px_0px_#FFFFFF20_inset]'
-            : '';
+  const variantClasses = {
+    simple:
+      'bg-transparent hover:bg-secondary border border-transparent hover:border-secondary/50 text-foreground',
+    outline:
+      'bg-background hover:bg-secondary border border-primary hover:border-secondary text-foreground hover:text-secondary-foreground',
+    primary:
+      'bg-primary hover:bg-primary/90 border border-primary text-primary-foreground hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0',
+    muted:
+      'bg-muted hover:bg-muted/80 border border-transparent text-muted-foreground hover:text-foreground',
+  };
+
+  const baseClasses =
+    'relative z-10 text-sm md:text-sm font-medium transition-all duration-200 rounded-md px-4 py-2 flex items-center justify-center';
+
   const Element = Tag as any;
 
   return (
     <Element
-      className={cn(
-        'bg-secondary relative z-10 bg-transparent hover:border-secondary hover:bg-secondary/50  border border-transparent text-white text-sm md:text-sm transition font-medium duration-200  rounded-md px-4 py-2  flex items-center justify-center ',
-        variantClass,
-        className
-      )}
+      className={cn(baseClasses, variantClasses[variant], className)}
       {...props}
     >
       {children ?? `Get Started`}

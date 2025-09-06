@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_shared_project_pictures",
+  "info": {
+    "displayName": "Porject Picture",
+    "icon": "chartCircle"
+  },
+  "options": {},
+  "attributes": {
+    "Right": {
+      "type": "string"
+    },
+    "Rotate": {
+      "type": "string"
+    },
+    "Top": {
+      "type": "string"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "Name": {
+      "type": "string"
+    },
+    "ClassName": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

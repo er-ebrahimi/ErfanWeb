@@ -5,6 +5,7 @@ import React from 'react';
 
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
+import { ThemeProvider } from '@/components/theme-provider';
 import { CartProvider } from '@/context/cart-context';
 import { generateMetadataObject } from '@/lib/shared/metadata';
 import fetchContentType from '@/lib/strapi/fetchContentType';
@@ -52,18 +53,25 @@ export default async function LocaleLayout(props: {
   );
   return (
     <ViewTransitions>
-      <CartProvider>
-        <div
-          className={cn(
-            inter.className,
-            'bg-charcoal antialiased h-full w-full'
-          )}
-        >
-          <Navbar data={pageData.navbar} locale={locale} />
-          {children}
-          <Footer data={pageData.footer} locale={locale} />
-        </div>
-      </CartProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <CartProvider>
+          <div
+            className={cn(
+              inter.className,
+              'bg-background text-foreground antialiased h-full w-full'
+            )}
+          >
+            <Navbar data={pageData.navbar} locale={locale} />
+            {children}
+            <Footer data={pageData.footer} locale={locale} />
+          </div>
+        </CartProvider>
+      </ThemeProvider>
     </ViewTransitions>
   );
 }

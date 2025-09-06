@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_dynamic_zone_project_pictures",
+  "info": {
+    "displayName": "Project Pictures",
+    "icon": "eye",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Pics": {
+      "displayName": "Porject Picture",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.porject-picture"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    }
+  }
+}

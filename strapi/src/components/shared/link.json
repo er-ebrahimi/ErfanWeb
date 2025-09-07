@@ -20,6 +20,9 @@
         "_parent",
         "_top"
       ]
+    },
+    "icon": {
+      "type": "string"
     }
   }
 }

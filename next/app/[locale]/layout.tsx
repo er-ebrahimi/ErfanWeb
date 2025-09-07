@@ -46,11 +46,33 @@ export default async function LocaleLayout(props: {
 
   const { children } = props;
 
-  const pageData = await fetchContentType(
-    'global',
-    { filters: { locale } },
-    true
-  );
+  let pageData;
+  try {
+    pageData = await fetchContentType('global', { filters: { locale } }, true);
+  } catch (error) {
+    console.error('Failed to fetch global content type:', error);
+    // Provide fallback data structure
+    pageData = {
+      navbar: {
+        left_navbar_items: [],
+        right_navbar_items: [],
+        logo: null,
+      },
+      footer: null,
+    };
+  }
+
+  // Ensure pageData has required structure
+  if (!pageData) {
+    pageData = {
+      navbar: {
+        left_navbar_items: [],
+        right_navbar_items: [],
+        logo: null,
+      },
+      footer: null,
+    };
+  }
   return (
     <ViewTransitions>
       <ThemeProvider

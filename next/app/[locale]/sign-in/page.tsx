@@ -2,36 +2,36 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { RegisterForm } from '@/components/auth/register-form';
+import { LoginForm } from '@/components/auth/login-form';
 
 export const metadata: Metadata = {
-  title: 'Sign Up | Your App',
-  description: 'Create a new account to get started.',
+  title: 'Sign In | Your App',
+  description: 'Sign in to your account to access your dashboard.',
 };
 
-export default function SignUpPage() {
+export default function SignInPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">Create Account</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Welcome Back</h1>
           <p className="text-muted-foreground mt-2">
-            Sign up to get started with your account
+            Sign in to your account to continue
           </p>
         </div>
 
-        <RegisterForm
+        <LoginForm
           onSuccess={() => {
-            // Redirect to dashboard after successful registration
+            // Redirect to dashboard after successful login
             redirect('/dashboard');
           }}
         />
 
         <div className="mt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            Already have an account?{' '}
-            <Link href="/sign-in" className="text-primary hover:underline">
-              Sign in here
+            Don&apos;t have an account?{' '}
+            <Link href="/sign-up" className="text-primary hover:underline">
+              Sign up here
             </Link>
           </p>
         </div>

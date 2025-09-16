@@ -41,9 +41,6 @@ export default async function fetchContentType(
     if (isEnabled) {
       queryParams.status = 'draft';
     }
-
-    // Construct the full URL for the API request
-    console.log('🚀 ~ fetchContentType ~ contentType:', contentType);
     const url = new URL(`api/${contentType}`, process.env.NEXT_PUBLIC_API_URL);
 
     // Perform the fetch request with the provided query parameters

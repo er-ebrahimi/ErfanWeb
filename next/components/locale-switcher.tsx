@@ -5,7 +5,15 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import { useSlugContext } from '@/app/context/SlugContext';
+import { i18n } from '@/i18n.config';
 import { cn } from '@/lib/utils';
+
+// Language labels for display
+const languageLabels: Record<string, string> = {
+  en: 'EN',
+  fr: 'FR',
+  fa: 'فا',
+};
 
 export function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
   const { state } = useSlugContext();
@@ -13,6 +21,12 @@ export function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
 
   const pathname = usePathname(); // Current path
   const segments = pathname?.split('/') || []; // Split path into segments
+
+  // Get available locales from i18n config or fallback to common locales
+  const availableLocales =
+    Object.keys(localizedSlugs).length > 0
+      ? Object.keys(localizedSlugs)
+      : i18n.locales; // Use locales from i18n config
 
   // Generate localized path for each locale
   const generateLocalizedPath = (locale: string): string => {
@@ -38,7 +52,7 @@ export function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
   return (
     <div className="flex gap-2 p-1 rounded-md">
       {!pathname?.includes('/products/') &&
-        Object.keys(localizedSlugs).map((locale) => (
+        availableLocales.map((locale) => (
           <Link key={locale} href={generateLocalizedPath(locale)}>
             <div
               className={cn(
@@ -47,8 +61,9 @@ export function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
                   ? 'bg-neutral-800 text-white shadow-[0px_1px_0px_0px_var(--neutral-600)_inset]'
                   : ''
               )}
+              title={`Switch to ${languageLabels[locale] || locale.toUpperCase()}`}
             >
-              {locale}
+              {languageLabels[locale] || locale.toUpperCase()}
             </div>
           </Link>
         ))}

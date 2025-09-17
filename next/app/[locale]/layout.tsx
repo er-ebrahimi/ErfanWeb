@@ -8,6 +8,8 @@ import { Navbar } from '@/components/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/context/auth-context';
 import { CartProvider } from '@/context/cart-context';
+import { iranSans } from '@/lib/fonts';
+import { getLocaleClasses } from '@/lib/rtl-utils';
 import { generateMetadataObject } from '@/lib/shared/metadata';
 import fetchContentType from '@/lib/strapi/fetchContentType';
 import { cn } from '@/lib/utils';
@@ -44,6 +46,7 @@ export default async function LocaleLayout(props: {
   const params = await props.params;
 
   const { locale } = params;
+  const { fontClass, direction } = getLocaleClasses(locale);
 
   const { children } = props;
 
@@ -86,9 +89,11 @@ export default async function LocaleLayout(props: {
           <CartProvider>
             <div
               className={cn(
-                inter.className,
+                locale === 'fa' ? iranSans.className : inter.className,
+                fontClass,
                 'bg-background text-foreground antialiased h-full w-full'
               )}
+              dir={direction}
             >
               <Navbar data={pageData.navbar} locale={locale} />
               {children}

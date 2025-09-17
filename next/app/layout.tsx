@@ -1,6 +1,7 @@
 import type { Viewport } from 'next';
 
 import { Locale, i18n } from '@/i18n.config';
+import { iranSans } from '@/lib/fonts';
 
 import './globals.css';
 
@@ -19,12 +20,14 @@ export async function generateStaticParams() {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: Locale };
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+    <html lang={params?.lang || 'en'} suppressHydrationWarning>
+      <body className={iranSans.variable} suppressHydrationWarning>
         <SlugProvider>{children}</SlugProvider>
       </body>
     </html>

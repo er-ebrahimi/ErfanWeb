@@ -168,7 +168,7 @@ export const FloatingNavbar = ({
       {/* Language Selector - Shows when language button is clicked */}
       {showLanguageSelector && (
         <div className="fixed bottom-24 left-1/2 transform -translate-x-1/2 z-50">
-          <div className="bg-card/90 backdrop-blur-md border border-border rounded-lg p-2 shadow-lg">
+          <div className="bg-card/90 backdrop-blur-md border border-border rounded-lg p-2 shadow-lg bg-muted dark:bg-primary/20">
             <LanguageSelector currentLocale={locale} />
           </div>
         </div>

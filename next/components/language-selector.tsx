@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import { useSlugContext } from '@/app/context/SlugContext';
 import { i18n } from '@/i18n.config';
+import { iranSans } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 
 // Language labels for display
@@ -62,7 +63,14 @@ export function LanguageSelector({ currentLocale }: { currentLocale: string }) {
       >
         <IconLanguage className="h-4 w-4" />
         <span className="text-sm font-medium">{currentLanguage.flag}</span>
-        <span className="text-sm">{currentLanguage.label}</span>
+        <span
+          className={cn(
+            'text-sm',
+            currentLocale === 'fa' ? iranSans.className : ''
+          )}
+        >
+          {currentLanguage.label}
+        </span>
         <IconChevronDown
           className={cn(
             'h-4 w-4 transition-transform duration-200',
@@ -73,7 +81,7 @@ export function LanguageSelector({ currentLocale }: { currentLocale: string }) {
 
       {/* Language Dropdown */}
       {isOpen && (
-        <div className="absolute bottom-full left-0 mb-2 w-48 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-lg z-50">
+        <div className="absolute bottom-full left-0 mb-2 w-48 bg-card/95 backdrop-blur-md border border-border rounded-lg shadow-lg z-50 bg-muted dark:bg-primary/20">
           <div className="py-2">
             {availableLocales.map((locale) => {
               const language = languageLabels[locale] || {
@@ -93,7 +101,14 @@ export function LanguageSelector({ currentLocale }: { currentLocale: string }) {
                   )}
                 >
                   <span className="text-lg">{language.flag}</span>
-                  <span className="flex-1">{language.label}</span>
+                  <span
+                    className={cn(
+                      'flex-1',
+                      locale === 'fa' ? iranSans.className : ''
+                    )}
+                  >
+                    {language.label}
+                  </span>
                   {isActive && (
                     <div className="w-2 h-2 bg-primary rounded-full" />
                   )}

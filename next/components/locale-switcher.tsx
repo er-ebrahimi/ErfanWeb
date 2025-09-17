@@ -6,12 +6,12 @@ import React from 'react';
 
 import { useSlugContext } from '@/app/context/SlugContext';
 import { i18n } from '@/i18n.config';
+import { iranSans } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 
 // Language labels for display
 const languageLabels: Record<string, string> = {
   en: 'EN',
-  fr: 'FR',
   fa: 'فا',
 };
 
@@ -50,16 +50,20 @@ export function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
   };
 
   return (
-    <div className="flex gap-2 p-1 rounded-md">
+    <div className="flex gap-2 p-1 rounded-md bg-muted dark:bg-primary">
       {!pathname?.includes('/products/') &&
         availableLocales.map((locale) => (
           <Link key={locale} href={generateLocalizedPath(locale)}>
             <div
               className={cn(
-                'flex cursor-pointer items-center justify-center text-sm leading-[110%] w-8 py-1 rounded-md hover:bg-neutral-800 hover:text-white/80 text-white hover:shadow-[0px_1px_0px_0px_var(--neutral-600)_inset] transition duration-200',
+                'flex cursor-pointer items-center justify-center text-sm leading-[110%] w-8 py-1 rounded-md transition-all duration-200',
+                'text-muted-foreground hover:text-foreground',
+                'hover:bg-muted dark:hover:bg-muted/80',
+                'hover:shadow-sm',
                 locale === currentLocale
-                  ? 'bg-neutral-800 text-white shadow-[0px_1px_0px_0px_var(--neutral-600)_inset]'
-                  : ''
+                  ? 'bg-background dark:bg-muted text-foreground shadow-sm border border-border'
+                  : 'hover:border hover:border-border/50',
+                locale === 'fa' ? iranSans.className : ''
               )}
               title={`Switch to ${languageLabels[locale] || locale.toUpperCase()}`}
             >

@@ -22,7 +22,6 @@ export async function generateMetadata(props: {
         slug: slugString,
         locale: locale,
       },
-      // populate: "seo",
     },
     true
   );

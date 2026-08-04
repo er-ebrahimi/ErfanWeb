@@ -20,7 +20,6 @@ export async function generateMetadata(props: {
         slug: 'homepage',
         locale: params.locale,
       },
-      // populate: 'seo',
     },
     true
   );

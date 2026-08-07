@@ -548,6 +548,7 @@ export interface SharedCons extends Struct.ComponentSchema {
   };
   attributes: {
     Description: Schema.Attribute.Text;
+    Icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     Title: Schema.Attribute.Text;
   };
 }

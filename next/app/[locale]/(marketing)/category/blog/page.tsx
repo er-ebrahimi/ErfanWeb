@@ -10,6 +10,7 @@ import { AmbientColor } from '@/components/decorations/ambient-color';
 import { FeatureIconContainer } from '@/components/dynamic-zone/features/feature-icon-container';
 import { Heading } from '@/components/elements/heading';
 import { Subheading } from '@/components/elements/subheading';
+import { JsonLd } from '@/components/json-ld';
 import { generateMetadataObject } from '@/lib/shared/metadata';
 import fetchContentType from '@/lib/strapi/fetchContentType';
 import { Article } from '@/types/types';
@@ -93,6 +94,7 @@ export default async function Blog(props: {
 
   return (
     <div className="relative overflow-hidden py-20 md:py-0">
+      <JsonLd seo={blogPage?.seo} id="blog-structured-data" />
       <ClientSlugHandler localizedSlugs={localizedSlugs} />
       <AmbientColor />
       <Container className="flex flex-col items-center justify-between pb-20">

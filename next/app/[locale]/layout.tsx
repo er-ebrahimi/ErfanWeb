@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 
 import { Footer } from '@/components/footer';
+import { JsonLd } from '@/components/json-ld';
 import { Navbar } from '@/components/navbar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { CartProvider } from '@/context/cart-context';
@@ -80,6 +81,7 @@ export default async function LocaleLayout(props: {
                 className="bg-background text-foreground antialiased h-full w-full"
                 dir={direction}
               >
+                <JsonLd seo={pageData?.seo} id="global-structured-data" />
                 <Navbar
                   data={pageData.navbar}
                   locale={locale}

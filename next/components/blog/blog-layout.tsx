@@ -3,13 +3,11 @@ import { format } from 'date-fns-jalali';
 import { getTranslations } from 'next-intl/server';
 import { Link } from 'next-view-transitions';
 
-import Script from 'next/script';
-
 import { Container } from '../container';
 import DynamicZoneManager from '../dynamic-zone/manager';
 import { StrapiImage } from '@/components/ui/strapi-image';
 import { Article } from '@/types/types';
-import { generateStructuredData } from '@/lib/shared/metadata';
+import { JsonLd } from '@/components/json-ld';
 import { cn } from '@/lib/utils';
 
 export async function BlogLayout({
@@ -22,17 +20,10 @@ export async function BlogLayout({
   children: React.ReactNode;
 }) {
   const t = await getTranslations({ locale, namespace: 'blog' });
-  const structuredData = article.seo ? generateStructuredData(article.seo) : undefined;
 
   return (
     <Container className="mt-16 lg:mt-32">
-      {structuredData && (
-        <Script
-          id="structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: structuredData }}
-        />
-      )}
+      <JsonLd seo={article?.seo} id="article-structured-data" />
       <div className="flex justify-between items-center px-2 py-8">
         <Link
           href={`/${locale}/category/blog`}

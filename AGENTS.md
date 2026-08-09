@@ -221,8 +221,8 @@ IMAGE_HOSTNAME=studioarman.site:2087
 ```
 
 ### Architecture notes (Docker)
-- Strapi runs directly on the host (not in Docker), bound to `127.0.0.1:1337`.
-- Nginx on the host proxies `https://studioarman.site:2087` → `http://127.0.0.1:1337`.
+- The server has **no Node.js** — everything (Strapi, Next.js, backups) runs in Docker containers, not directly on the host.
+- Nginx proxies `https://studioarman.site:2087` → `http://127.0.0.1:1337` (Strapi container).
 - The Next.js container connects to Strapi via Nginx at `https://studioarman.site:2087`.
 - DNS in the container resolves `studioarman.site` to the server's public IP `185.239.3.14`.
 - `host.docker.internal` is mapped to the Docker bridge gateway for local dev only.

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import enamadLogo from "@/public/enamad.webp";
+import enamadLogo from '@/public/enamad.webp';
 
 const ENAMAD_URL = process.env.NEXT_PUBLIC_ENAMAD_URL || '';
 
@@ -14,7 +14,7 @@ export const EnamadLogo = () => (
       alt="enamad-logo"
       width={100}
       height={100}
-      style={{ cursor: "pointer" }}
+      style={{ cursor: 'pointer' }}
     />
   </a>
 );

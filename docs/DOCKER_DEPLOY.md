@@ -11,9 +11,9 @@
 
 | Var                      | Prefixed?      | Inlined at build? | Purpose                                              | Local (Docker)                     | Server                          |
 | ------------------------ | -------------- | :---------------: | ---------------------------------------------------- | ---------------------------------- | ------------------------------- |
-| `STRAPI_INTERNAL_URL`    | No             |     ❌ Runtime     | Server API calls (fetchContentType, auth, redirects) | `http://host.docker.internal:1337` | `https://studioarman.site:2087` |
-| `NEXT_PUBLIC_API_URL`    | `NEXT_PUBLIC_` |       ✅ Yes       | Client auth calls (auth-context.tsx)                 | `http://localhost:1337`            | `https://studioarman.site:2087` |
-| `NEXT_PUBLIC_STRAPI_URL` | `NEXT_PUBLIC_` |       ✅ Yes       | Browser-facing image URLs                            | `http://localhost:1337`            | `https://studioarman.site:2087` |
+| `STRAPI_INTERNAL_URL`    | No             |    ❌ Runtime     | Server API calls (fetchContentType, auth, redirects) | `http://host.docker.internal:1337` | `https://studioarman.site:2087` |
+| `NEXT_PUBLIC_API_URL`    | `NEXT_PUBLIC_` |      ✅ Yes       | Client auth calls (auth-context.tsx)                 | `http://localhost:1337`            | `https://studioarman.site:2087` |
+| `NEXT_PUBLIC_STRAPI_URL` | `NEXT_PUBLIC_` |      ✅ Yes       | Browser-facing image URLs                            | `http://localhost:1337`            | `https://studioarman.site:2087` |
 
 `NEXT_PUBLIC_*` vars are **baked into the JS bundle at build time** — changing them requires a rebuild.  
 `STRAPI_INTERNAL_URL` is read from `process.env` at runtime — change it in `.env.local` and restart the container.
@@ -166,6 +166,7 @@ docker run --rm -v strapi-uploads:/target -v $(pwd):/backup alpine tar xzf /back
 ## Server env files
 
 **`strapi.env`** :
+
 ```
 HOST=0.0.0.0
 PORT=1337
@@ -183,6 +184,7 @@ PUBLIC_URL=https://studioarman.site:2087
 ```
 
 **`next.env`** :
+
 ```
 WEBSITE_URL=http://localhost:3000
 PORT=4000

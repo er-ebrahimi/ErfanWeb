@@ -7,7 +7,7 @@ services:
       DATABASE_FILENAME: .tmp/data.db
       NODE_ENV: production
     expose:
-      - "1337"
+      - '1337'
     networks:
       - studio-net
 

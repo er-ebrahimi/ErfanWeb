@@ -63,7 +63,10 @@ function TiltCard({ item, router }: { item: CardItem; router: any }) {
       }
       className="h-full flex flex-col"
     >
-      <CardContainer className="inter-var m-4 w-full" containerClassName="items-stretch h-full">
+      <CardContainer
+        className="inter-var m-4 w-full"
+        containerClassName="items-stretch h-full"
+      >
         <CardBody className="bg-card relative group/card dark:hover:shadow-2xl dark:hover:shadow-primary/[0.1] dark:bg-card dark:border-border border-border w-full h-full flex flex-col rounded-xl p-6 border  ">
           <CardItem translateZ="100" className="w-full">
             <Image
@@ -90,24 +93,26 @@ function TiltCard({ item, router }: { item: CardItem; router: any }) {
 
           <div className="flex justify-between items-center mt-4">
             {item.Buttons.map((item: any, index: number) => {
-              return <CardItem
-                key={`${item.label}-${index}`}
-                translateZ={20}
-                as="button"
-                variant={item.variant}
-                className={
-                  item.variant === 'simple'
-                    ? 'px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-bold'
-                    : item.variant === 'outline'
-                      ? 'px-4 py-2 rounded-xl text-xs font-normal text-foreground'
-                      : ''
-                }
-                onClick={() => {
-                  router.push(item.URL);
-                }}
-              >
-                {item.text}
-              </CardItem>
+              return (
+                <CardItem
+                  key={`${item.label}-${index}`}
+                  translateZ={20}
+                  as="button"
+                  variant={item.variant}
+                  className={
+                    item.variant === 'simple'
+                      ? 'px-4 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-bold'
+                      : item.variant === 'outline'
+                        ? 'px-4 py-2 rounded-xl text-xs font-normal text-foreground'
+                        : ''
+                  }
+                  onClick={() => {
+                    router.push(item.URL);
+                  }}
+                >
+                  {item.text}
+                </CardItem>
+              );
             })}
           </div>
         </CardBody>

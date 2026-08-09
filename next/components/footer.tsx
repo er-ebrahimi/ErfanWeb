@@ -1,8 +1,8 @@
 import { Link } from 'next-view-transitions';
 
-import { localizeHref } from '@/lib/url';
 import { EnamadWrapper } from '@/components/enamad-wrapper';
 import { Logo } from '@/components/logo';
+import { localizeHref } from '@/lib/url';
 
 export const Footer = async ({
   data,

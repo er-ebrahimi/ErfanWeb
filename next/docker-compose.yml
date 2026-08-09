@@ -15,11 +15,11 @@ services:
         DOMAIN: ${DOMAIN:-localhost}
         BACK_PORT: ${BACK_PORT:-1337}
     ports:
-      - "3000:4000"
+      - '3000:4000'
     environment:
       NEXT_PUBLIC_STRAPI_URL: ${NEXT_PUBLIC_STRAPI_URL:-https://studioarman.site:2087}
       STRAPI_INTERNAL_URL: ${STRAPI_INTERNAL_URL:-https://studioarman.site:2087}
     env_file:
       - .env
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - 'host.docker.internal:host-gateway'

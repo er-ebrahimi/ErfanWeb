@@ -1,11 +1,13 @@
 import 'next-intl';
+
+import { type Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
+
 import ClientSlugHandler from '../../ClientSlugHandler';
 import { BlogLayout } from '@/components/blog/blog-layout';
+import { generateMetadataObject } from '@/lib/shared/metadata';
 import fetchContentType from '@/lib/strapi/fetchContentType';
-import { generateMetadataObject } from "@/lib/shared/metadata";
-import { type Metadata } from "next";
 
 export const revalidate = 60;
 
@@ -16,7 +18,7 @@ export async function generateMetadata(props: {
   const { slug, locale } = params;
   const slugString = Array.isArray(slug) ? slug.join('/') : slug;
   const article = await fetchContentType(
-    "articles",
+    'articles',
     {
       filters: {
         slug: slugString,

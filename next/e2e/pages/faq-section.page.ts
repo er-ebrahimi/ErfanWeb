@@ -1,6 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
-import { BasePage } from './base.page';
+
 import { ROUTES } from '../utils/constants';
+import { BasePage } from './base.page';
 
 export class FaqSectionPage extends BasePage {
   constructor(page: Page) {

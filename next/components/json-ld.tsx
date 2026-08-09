@@ -1,7 +1,7 @@
 import Script from 'next/script';
 
-import { Seo } from '@/types/types';
 import { generateStructuredData } from '@/lib/shared/metadata';
+import { Seo } from '@/types/types';
 
 export function JsonLd({
   seo,

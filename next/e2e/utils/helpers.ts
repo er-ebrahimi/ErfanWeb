@@ -1,12 +1,18 @@
-import { type Page, type Locator } from '@playwright/test';
+import { type Locator, type Page } from '@playwright/test';
+
 import { TIMEOUTS } from './constants';
 
 export async function waitForPageStable(page: Page): Promise<void> {
   await page.waitForLoadState('domcontentloaded');
-  await page.waitForLoadState('networkidle', { timeout: TIMEOUTS.networkIdle }).catch(() => {});
+  await page
+    .waitForLoadState('networkidle', { timeout: TIMEOUTS.networkIdle })
+    .catch(() => {});
 }
 
-export function collectPageErrors(page: Page): { errors: string[]; stop: () => void } {
+export function collectPageErrors(page: Page): {
+  errors: string[];
+  stop: () => void;
+} {
   const errors: string[] = [];
   const handler = (err: Error) => errors.push(err.message);
   page.on('pageerror', handler);

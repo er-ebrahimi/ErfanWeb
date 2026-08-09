@@ -1,6 +1,8 @@
-import { describe, it, expect, vi } from 'vitest';
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
+import { describe, expect, it, vi } from 'vitest';
+
+import { JsonLd } from '../../components/json-ld';
 
 vi.mock('next/script', () => ({
   default: function MockScript({ id, type, dangerouslySetInnerHTML }: any) {
@@ -8,9 +10,8 @@ vi.mock('next/script', () => ({
   },
 }));
 
-import { JsonLd } from '../../components/json-ld';
-
-const STRAPI_URL = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
+const STRAPI_URL =
+  process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
 
 async function fetchStrapi(path: string) {
   if (!STRAPI_URL) return null;
@@ -27,12 +28,18 @@ async function fetchStrapi(path: string) {
 
 describe.skipIf(!STRAPI_URL)('JsonLd integration — real Strapi data', () => {
   it('renders structured data from Strapi global seo', async () => {
-    const data = await fetchStrapi('/global?populate[seo][fields][0]=structuredData&populate[seo][fields][1]=metaTitle');
+    const data = await fetchStrapi(
+      '/global?populate[seo][fields][0]=structuredData&populate[seo][fields][1]=metaTitle'
+    );
     const seo = data?.data?.seo;
     if (!seo?.structuredData) return;
 
-    const { container } = render(React.createElement(JsonLd, { seo, id: 'global-structured-data' }));
-    const script = container.querySelector('script[type="application/ld+json"]');
+    const { container } = render(
+      React.createElement(JsonLd, { seo, id: 'global-structured-data' })
+    );
+    const script = container.querySelector(
+      'script[type="application/ld+json"]'
+    );
     expect(script).toBeTruthy();
 
     const content = JSON.parse(script?.innerHTML || '{}');
@@ -48,8 +55,15 @@ describe.skipIf(!STRAPI_URL)('JsonLd integration — real Strapi data', () => {
     for (const page of pages) {
       if (!page.seo?.structuredData) continue;
 
-      const { container } = render(React.createElement(JsonLd, { seo: page.seo, id: 'page-structured-data' }));
-      const script = container.querySelector('script[type="application/ld+json"]');
+      const { container } = render(
+        React.createElement(JsonLd, {
+          seo: page.seo,
+          id: 'page-structured-data',
+        })
+      );
+      const script = container.querySelector(
+        'script[type="application/ld+json"]'
+      );
       expect(script).toBeTruthy();
 
       const content = JSON.parse(script?.innerHTML || '{}');
@@ -66,8 +80,15 @@ describe.skipIf(!STRAPI_URL)('JsonLd integration — real Strapi data', () => {
     for (const article of articles) {
       if (!article.seo?.structuredData) continue;
 
-      const { container } = render(React.createElement(JsonLd, { seo: article.seo, id: 'article-structured-data' }));
-      const script = container.querySelector('script[type="application/ld+json"]');
+      const { container } = render(
+        React.createElement(JsonLd, {
+          seo: article.seo,
+          id: 'article-structured-data',
+        })
+      );
+      const script = container.querySelector(
+        'script[type="application/ld+json"]'
+      );
       expect(script).toBeTruthy();
 
       const content = JSON.parse(script?.innerHTML || '{}');
@@ -76,12 +97,18 @@ describe.skipIf(!STRAPI_URL)('JsonLd integration — real Strapi data', () => {
   });
 
   it('renders structured data from Strapi blog-page', async () => {
-    const data = await fetchStrapi('/blog-page?populate[seo][fields][0]=structuredData');
+    const data = await fetchStrapi(
+      '/blog-page?populate[seo][fields][0]=structuredData'
+    );
     const seo = data?.data?.seo;
     if (!seo?.structuredData) return;
 
-    const { container } = render(React.createElement(JsonLd, { seo, id: 'blog-structured-data' }));
-    const script = container.querySelector('script[type="application/ld+json"]');
+    const { container } = render(
+      React.createElement(JsonLd, { seo, id: 'blog-structured-data' })
+    );
+    const script = container.querySelector(
+      'script[type="application/ld+json"]'
+    );
     expect(script).toBeTruthy();
 
     const content = JSON.parse(script?.innerHTML || '{}');

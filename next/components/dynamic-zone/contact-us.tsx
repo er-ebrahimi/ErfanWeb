@@ -12,7 +12,7 @@ import 'altcha';
 
 import type { AltchaWidgetElement } from 'altcha/types/generic';
 
-import type { } from 'altcha/types/react';
+import type {} from 'altcha/types/react';
 
 const ALTCHA_DISABLED = process.env.NEXT_PUBLIC_ALTCHA_DISABLED === 'true';
 
@@ -45,7 +45,7 @@ function AltchaWidget({
   locale: string;
 }) {
   const isClient = useSyncExternalStore(
-    () => () => { },
+    () => () => {},
     () => true,
     () => false
   );
@@ -229,10 +229,11 @@ const ContactUs = ({
         >
           {submitStatus.type && (
             <div
-              className={`p-4 rounded-lg text-center ${submitStatus.type === 'success'
-                ? 'bg-green-50 text-green-800 dark:bg-green-900 dark:text-green-200 border border-green-200 dark:border-green-700'
-                : 'bg-red-50 text-red-800 dark:bg-red-900 dark:text-red-200 border border-red-200 dark:border-red-700'
-                }`}
+              className={`p-4 rounded-lg text-center ${
+                submitStatus.type === 'success'
+                  ? 'bg-green-50 text-green-800 dark:bg-green-900 dark:text-green-200 border border-green-200 dark:border-green-700'
+                  : 'bg-red-50 text-red-800 dark:bg-red-900 dark:text-red-200 border border-red-200 dark:border-red-700'
+              }`}
             >
               {submitStatus.message}
             </div>

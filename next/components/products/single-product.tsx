@@ -48,7 +48,9 @@ export const SingleProduct = ({ product }: { product: Product }) => {
             {product.images &&
               product.images.map((image, index) => (
                 <button
-                  onClick={() => setActiveThumbnail(clientStrapiImage(image.url))}
+                  onClick={() =>
+                    setActiveThumbnail(clientStrapiImage(image.url))
+                  }
                   key={'product-image' + index}
                   title={`View product image ${index + 1}`}
                   aria-label={`View product image ${index + 1}`}

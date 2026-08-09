@@ -30,7 +30,9 @@ export class NavbarPage {
   async clickNavLink(name: string | RegExp): Promise<void> {
     const link = this.navbar.getByRole('link', { name });
     await link.click();
-    await this.page.waitForLoadState('domcontentloaded', { timeout: 10_000 }).catch(() => {});
+    await this.page
+      .waitForLoadState('domcontentloaded', { timeout: 10_000 })
+      .catch(() => {});
   }
 
   async openMobileMenu(): Promise<void> {

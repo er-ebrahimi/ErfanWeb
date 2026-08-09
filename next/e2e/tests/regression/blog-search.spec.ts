@@ -1,18 +1,18 @@
 /**
  * Regression Test: Blog Search & Pagination
- * 
+ *
  * Why: Users need to find specific articles. Broken search means
  * content is effectively invisible. FuzzySearch is client-side,
  * so it must work across all supported browsers.
- * 
+ *
  * Business risk: Reduced content discoverability, user frustration.
  * Priority: P1 (High)
  */
-
 import { expect } from '@playwright/test';
+
+import { BLOG_SEARCH } from '../../data/test-data';
 import { test } from '../../fixtures';
 import { BlogListingPage } from '../../pages/blog-listing.page';
-import { BLOG_SEARCH } from '../../data/test-data';
 
 test.describe('Blog search and pagination', { tag: '@regression' }, () => {
   let blogPage: BlogListingPage;
@@ -58,7 +58,10 @@ test.describe('Blog search and pagination', { tag: '@regression' }, () => {
 
   test('pagination controls appear when there are enough articles', async () => {
     const initialCount = await blogPage.articleRowLinks.count();
-    test.skip(initialCount <= 6, 'Not enough articles for pagination (need >6)');
+    test.skip(
+      initialCount <= 6,
+      'Not enough articles for pagination (need >6)'
+    );
 
     await expect(blogPage.nextButton).toBeVisible();
     await expect(blogPage.pageInfo).toBeVisible();

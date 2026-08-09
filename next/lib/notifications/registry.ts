@@ -1,7 +1,7 @@
-import type { NotificationProvider } from './types';
 import { BaleProvider } from './providers/bale';
 import { TelegramProvider } from './providers/telegram';
 import { Web3FormsProvider } from './providers/web3forms';
+import type { NotificationProvider } from './types';
 
 const providers: Record<string, () => NotificationProvider> = {
   bale: () => new BaleProvider(),

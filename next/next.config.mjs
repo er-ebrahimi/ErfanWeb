@@ -20,7 +20,6 @@ const nextConfig = {
     process.env.NEXT_PUBLIC_API_URL,
     process.env.IMAGE_HOSTNAME,
     process.env.DOMAIN,
-
   ],
   images: {
     unoptimized: process.env.NODE_ENV === 'development',
@@ -78,9 +77,9 @@ const nextConfig = {
         pathname: '/uploads/**',
       },
       {
-        protocol: "https",
-        hostname: 'trustseal.enamad.ir'
-      }
+        protocol: 'https',
+        hostname: 'trustseal.enamad.ir',
+      },
     ],
   },
   pageExtensions: ['ts', 'tsx'],
@@ -89,31 +88,46 @@ const nextConfig = {
       {
         source: '/_next/static/:path*',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
       },
       {
         source: '/_next/image/:path*',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
       },
       {
         source: '/favicon-sets/:path*',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
       },
       {
         source: '/:siteId/favicon-sets/:path*',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
       },
       {
         source: '/:path((?:robots\\.txt|sitemap\\.xml))',
         headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
         ],
       },
     ];
@@ -121,10 +135,9 @@ const nextConfig = {
   async redirects() {
     let redirections = [];
     try {
-      const apiUrl = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
-      const res = await fetch(
-        `${apiUrl}/api/redirections`
-      );
+      const apiUrl =
+        process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
+      const res = await fetch(`${apiUrl}/api/redirections`);
       const result = await res.json();
       if (!result?.data) {
         return [];

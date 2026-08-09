@@ -89,15 +89,22 @@ Every page extends `BasePage`:
 
 ```typescript
 export class MyPage extends BasePage {
-  get path(): string { return '/fa/my-route'; }
+  get path(): string {
+    return '/fa/my-route';
+  }
 
   // Role-based locators only — no fragile CSS
-  get heading() { return this.page.getByRole('heading', { level: 1 }); }
-  get submitBtn() { return this.page.getByRole('button', { name: 'ارسال' }); }
+  get heading() {
+    return this.page.getByRole('heading', { level: 1 });
+  }
+  get submitBtn() {
+    return this.page.getByRole('button', { name: 'ارسال' });
+  }
 }
 ```
 
 **Rules:**
+
 - Always expose `get path()` — enables `goto()`
 - Use `getByRole()`, `getByPlaceholder()`, `getByLabel()` — never CSS selectors
 - Expose **locators** (not strings), let tests decide assertions
@@ -144,11 +151,11 @@ For tests that need control, intercept `/api/altcha/challenge` to return a known
 
 ## Tag Conventions
 
-| Tag | Priority | When to run | Failures mean |
-|-----|----------|-------------|---------------|
-| `@smoke` | P0 | Every deploy | Site is broken |
-| `@regression` | P1 | Before release | Feature degraded |
-| `@api` | P1 | After API changes | Contract broken |
+| Tag           | Priority | When to run       | Failures mean    |
+| ------------- | -------- | ----------------- | ---------------- |
+| `@smoke`      | P0       | Every deploy      | Site is broken   |
+| `@regression` | P1       | Before release    | Feature degraded |
+| `@api`        | P1       | After API changes | Contract broken  |
 
 ## Writing Tests
 
@@ -161,6 +168,7 @@ For tests that need control, intercept `/api/altcha/challenge` to return a known
  * Priority: P0/P1/P2
  */
 import { expect } from '@playwright/test';
+
 import { test } from '../../fixtures';
 import { MyPage } from '../../pages/my.page';
 
@@ -207,10 +215,10 @@ npx playwright test --shard=1/4
 
 ## Troubleshooting
 
-| Symptom | Cause | Fix |
-|---------|-------|-----|
-| Pages return 500 | Strapi not running | Start Strapi: `cd strapi && yarn develop` |
-| ALTCHA never verifies | Rate-limited or secret mismatch | Ensure `ALTCHA_HMAC_SECRET` in `.env.local` |
-| Mobile menu not found | Viewport too large | Set `test.use({ viewport: { width: 375, height: 667 } })` |
-| Tests flaky | Race conditions | Add `waitForLoadState('networkidle')` after navigation |
-| ESLint fails on e2e/| e2e dir not in .eslintignore | Already added to tsconfig exclude |
+| Symptom               | Cause                           | Fix                                                       |
+| --------------------- | ------------------------------- | --------------------------------------------------------- |
+| Pages return 500      | Strapi not running              | Start Strapi: `cd strapi && yarn develop`                 |
+| ALTCHA never verifies | Rate-limited or secret mismatch | Ensure `ALTCHA_HMAC_SECRET` in `.env.local`               |
+| Mobile menu not found | Viewport too large              | Set `test.use({ viewport: { width: 375, height: 667 } })` |
+| Tests flaky           | Race conditions                 | Add `waitForLoadState('networkidle')` after navigation    |
+| ESLint fails on e2e/  | e2e dir not in .eslintignore    | Already added to tsconfig exclude                         |

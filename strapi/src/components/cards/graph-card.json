@@ -23,11 +23,7 @@
     },
     "span": {
       "type": "enumeration",
-      "enum": [
-        "one",
-        "two",
-        "three"
-      ]
+      "enum": ["one", "two", "three"]
     }
   }
 }

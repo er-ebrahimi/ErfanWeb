@@ -24,7 +24,9 @@ export default async function LocaleLayout(props: {
 
   const { locale } = params;
   if (!routing.locales.includes(locale as any)) {
-    console.error(`[LocaleLayout] Invalid locale "${locale}" - calling notFound()`);
+    console.error(
+      `[LocaleLayout] Invalid locale "${locale}" - calling notFound()`
+    );
     notFound();
   }
 
@@ -76,23 +78,21 @@ export default async function LocaleLayout(props: {
           enableSystem
           disableTransitionOnChange
         >
-            <CartProvider>
-              <div
-                className="bg-background text-foreground antialiased h-full w-full"
-                dir={direction}
-              >
-                <JsonLd seo={pageData?.seo} id="global-structured-data" />
-                <Navbar
-                  data={pageData.navbar}
-                  locale={locale}
-                  languages={pageData.languages}
-                />
-                <main id="main-content">
-                  {children}
-                </main>
-                <Footer data={pageData.footer} locale={locale} />
-              </div>
-            </CartProvider>
+          <CartProvider>
+            <div
+              className="bg-background text-foreground antialiased h-full w-full"
+              dir={direction}
+            >
+              <JsonLd seo={pageData?.seo} id="global-structured-data" />
+              <Navbar
+                data={pageData.navbar}
+                locale={locale}
+                languages={pageData.languages}
+              />
+              <main id="main-content">{children}</main>
+              <Footer data={pageData.footer} locale={locale} />
+            </div>
+          </CartProvider>
         </ThemeProvider>
       </ViewTransitions>
     </NextIntlClientProvider>

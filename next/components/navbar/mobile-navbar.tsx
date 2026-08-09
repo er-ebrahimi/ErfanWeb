@@ -10,8 +10,8 @@ import { LocaleSwitcher } from '../locale-switcher';
 import { ThemeToggle } from '../theme-toggle';
 import { Button } from '@/components/elements/button';
 import { Logo } from '@/components/logo';
-import { cn } from '@/lib/utils';
 import { localizeHref } from '@/lib/url';
+import { cn } from '@/lib/utils';
 
 type Props = {
   leftNavbarItems: {

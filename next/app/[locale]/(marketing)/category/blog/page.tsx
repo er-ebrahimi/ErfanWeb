@@ -2,6 +2,7 @@ import { IconClipboardText } from '@tabler/icons-react';
 import { type Metadata } from 'next';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
+
 import ClientSlugHandler from '../../ClientSlugHandler';
 import { BlogCard } from '@/components/blog/blog-card';
 import { BlogPostRows } from '@/components/blog/blog-post-rows';
@@ -21,7 +22,6 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const params = await props.params;
-
 
   const pageData = await fetchContentType(
     'blog-page',
@@ -84,13 +84,14 @@ export default async function Blog(props: {
     notFound();
   }
 
-  const localizedSlugs: Record<string, string> = blogPage?.localizations?.reduce(
-    (acc: Record<string, string>, localization: any) => {
-      acc[localization.locale] = 'blog';
-      return acc;
-    },
-    { [params.locale]: 'blog' }
-  ) ?? { [params.locale]: 'blog' };
+  const localizedSlugs: Record<string, string> =
+    blogPage?.localizations?.reduce(
+      (acc: Record<string, string>, localization: any) => {
+        acc[localization.locale] = 'blog';
+        return acc;
+      },
+      { [params.locale]: 'blog' }
+    ) ?? { [params.locale]: 'blog' };
 
   return (
     <div className="relative overflow-hidden py-20 md:py-0">
@@ -111,11 +112,13 @@ export default async function Blog(props: {
         </div>
 
         {articles.data.slice(0, 1).map((article: Article) => {
-          return <BlogCard
-            article={article}
-            locale={params.locale}
-            key={article.title}
-          />;
+          return (
+            <BlogCard
+              article={article}
+              locale={params.locale}
+              key={article.title}
+            />
+          );
         })}
 
         <BlogPostRows articles={articles.data} />

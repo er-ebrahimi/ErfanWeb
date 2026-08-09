@@ -14,9 +14,7 @@ export const BlogCard = ({
   locale: string;
 }) => {
   return (
-    <div
-      className="shadow-derek grid grid-cols-1 md:grid-cols-2 rounded-3xl group border border-transparent hover:border-border w-full hover:bg-card/50 overflow-hidden hover:scale-[1.02] transition duration-200 relative max-h-[24rem]"
-    >
+    <div className="shadow-derek grid grid-cols-1 md:grid-cols-2 rounded-3xl group border border-transparent hover:border-border w-full hover:bg-card/50 overflow-hidden hover:scale-[1.02] transition duration-200 relative max-h-[24rem]">
       <Link
         href={`/${locale}/category/${article.slug}`}
         className="absolute inset-0 z-0"
@@ -85,9 +83,7 @@ export const BlogCardVertical = ({
   locale: string;
 }) => {
   return (
-    <div
-      className="shadow-derek   rounded-3xl group border border-transparent hover:border-border w-full hover:bg-card/50  overflow-hidden  hover:scale-[1.02] transition duration-200 relative"
-    >
+    <div className="shadow-derek   rounded-3xl group border border-transparent hover:border-border w-full hover:bg-card/50  overflow-hidden  hover:scale-[1.02] transition duration-200 relative">
       <Link
         href={`/${locale}/category/${article.slug}`}
         className="absolute inset-0 z-0"

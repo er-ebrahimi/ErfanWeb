@@ -9,9 +9,7 @@ export function generateMetadataObject(seo: any) {
     other: {
       ...(seo?.metaViewport ? { viewport: seo.metaViewport } : {}),
     },
-    alternates: seo?.canonicalURL
-      ? { canonical: seo.canonicalURL }
-      : undefined,
+    alternates: seo?.canonicalURL ? { canonical: seo.canonicalURL } : undefined,
     openGraph: {
       title: seo?.ogTitle || seo?.metaTitle || 'Default OG Title',
       description:

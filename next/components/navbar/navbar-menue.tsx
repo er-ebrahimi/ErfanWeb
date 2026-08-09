@@ -1,30 +1,33 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import Link from "next/link"
-import { usePathname } from 'next/navigation';
-import { useLocale, useTranslations } from 'next-intl';
+import * as React from 'react';
 import {
   IconArticle,
   IconBriefcase,
+  IconCheck,
   IconEdit,
   IconHelp,
   IconHome,
   IconLanguage,
   IconMail,
+  IconMenu2,
   IconMoon,
+  IconPlus,
   IconQuestionMark,
   IconSettings,
   IconSun,
   IconUser,
-  IconCheck,
-  IconMenu2,
-  IconPlus,
 } from '@tabler/icons-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useLocale, useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from "framer-motion";
 
+import { useSlugContext } from '@/app/context/SlugContext';
+import { Button } from '@/components/elements/button';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -33,22 +36,18 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from '@/components/ui/navigation-menu';
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
-import { Button } from "@/components/elements/button"
-
-import { useSlugContext } from '@/app/context/SlugContext';
+} from '@/components/ui/sheet';
 import { languageLabels } from '@/lib/constants';
 import { getLocaleConfig } from '@/lib/fonts';
-import { cn } from '@/lib/utils';
 import { localizeHref } from '@/lib/url';
-import { useRouter } from "next/navigation";
+import { cn } from '@/lib/utils';
 
 type NavbarItem = {
   URL: string;
@@ -74,7 +73,7 @@ type Props = {
 };
 
 const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
+  React.ElementRef<'a'>,
   React.ComponentPropsWithoutRef<typeof Link> & { title: string }
 >(({ className, title, children, ...props }, ref) => {
   return (
@@ -83,7 +82,7 @@ const ListItem = React.forwardRef<
         <Link
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
             className
           )}
           {...props}
@@ -95,9 +94,9 @@ const ListItem = React.forwardRef<
         </Link>
       </NavigationMenuLink>
     </li>
-  )
-})
-ListItem.displayName = "ListItem"
+  );
+});
+ListItem.displayName = 'ListItem';
 
 // Icon mapping for Strapi icon field or text-based fallback
 const getIconForNavItem = (text: string, iconName?: string) => {
@@ -166,11 +165,9 @@ export function NavbarMenu({
   const { theme, setTheme } = useTheme();
   const [sheetOpen, setSheetOpen] = useState(false);
   const pathname = usePathname();
-  useEffect(() => {
-  }, [sheetOpen]);
+  useEffect(() => {}, [sheetOpen]);
 
-  useEffect(() => {
-  }, [pathname]);
+  useEffect(() => {}, [pathname]);
   // Language logic
   const { state } = useSlugContext();
   const { localizedSlugs } = state;
@@ -216,20 +213,33 @@ export function NavbarMenu({
               <IconMenu2 className="h-6 w-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className={cn("overflow-y-auto p-6", fontClass)} dir={dir}>
+          <SheetContent
+            side="right"
+            className={cn('overflow-y-auto p-6', fontClass)}
+            dir={dir}
+          >
             <SheetHeader>
               <SheetTitle className="sr-only">{t('menu')}</SheetTitle>
             </SheetHeader>
             <div className="flex flex-col gap-4 mt-6 pb-6">
               {/* Left Navbar Items — Home first */}
-              {leftNavbarItems
-                .map((item, index) => (
-                  <MobileNavItem key={`left-${index}`} item={item} locale={locale} onClose={() => setSheetOpen(false)} />
-                ))}
+              {leftNavbarItems.map((item, index) => (
+                <MobileNavItem
+                  key={`left-${index}`}
+                  item={item}
+                  locale={locale}
+                  onClose={() => setSheetOpen(false)}
+                />
+              ))}
 
               {/* Right Navbar Items */}
               {rightNavbarItems?.map((item, index) => (
-                <MobileNavItem key={`right-${index}`} item={item} locale={locale} onClose={() => setSheetOpen(false)} />
+                <MobileNavItem
+                  key={`right-${index}`}
+                  item={item}
+                  locale={locale}
+                  onClose={() => setSheetOpen(false)}
+                />
               ))}
 
               <div className="flex flex-col gap-4 mt-4 pt-4 border-t">
@@ -237,7 +247,9 @@ export function NavbarMenu({
                 {showTheme && (
                   <div
                     className="flex items-center gap-2 px-2 py-2 cursor-pointer hover:bg-accent rounded-full"
-                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                    onClick={() =>
+                      setTheme(theme === 'dark' ? 'light' : 'dark')
+                    }
                   >
                     <div className="relative h-4 w-4 mr-1">
                       <IconSun
@@ -255,14 +267,18 @@ export function NavbarMenu({
     "
                       />
                     </div>
-                    <span>{theme === 'dark' ? t('lightMode') : t('darkMode')}</span>
+                    <span>
+                      {theme === 'dark' ? t('lightMode') : t('darkMode')}
+                    </span>
                   </div>
                 )}
 
                 {/* Language Selector */}
                 {showLanguage && languages && languages.length > 0 && (
                   <div className="flex flex-col gap-2">
-                    <div className="px-3 text-sm font-medium text-muted-foreground">{t('language')}</div>
+                    <div className="px-3 text-sm font-medium text-muted-foreground">
+                      {t('language')}
+                    </div>
                     {languages.map((language) => {
                       const languageInfo = languageLabels[language.code] || {
                         label: language.name || language.code.toUpperCase(),
@@ -277,13 +293,15 @@ export function NavbarMenu({
                           href={generateLocalizedPath(language.code)}
                           onClick={() => setSheetOpen(false)}
                           className={cn(
-                            "flex items-center justify-between w-full rounded-full px-3 py-3 hover:bg-accent hover:text-accent-foreground",
-                            isActive && "bg-accent text-accent-foreground"
+                            'flex items-center justify-between w-full rounded-full px-3 py-3 hover:bg-accent hover:text-accent-foreground',
+                            isActive && 'bg-accent text-accent-foreground'
                           )}
                         >
                           <div className="flex items-center gap-2">
                             <span>{languageInfo.flag}</span>
-                            <span className={cn("text-sm", localeConfig.fontClass)}>
+                            <span
+                              className={cn('text-sm', localeConfig.fontClass)}
+                            >
                               {languageInfo.label}
                             </span>
                           </div>
@@ -308,16 +326,25 @@ export function NavbarMenu({
               if (item.children && item.children.length > 0) {
                 return (
                   <NavigationMenuItem key={`left-${index}`}>
-                    <NavigationMenuTrigger className="px-2" onClick={() => { router.push(localizeHref(item.URL, locale)) }}>
+                    <NavigationMenuTrigger
+                      className="px-2"
+                      onClick={() => {
+                        router.push(localizeHref(item.URL, locale));
+                      }}
+                    >
                       <div className="flex items-center gap-2">
                         <span>{item.text}</span>
                       </div>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent className="border border-border rounded-xl">
-                      <ul className={cn(
-                        "flex flex-col max-h-[calc(100vh-100px)] p-4 w-max h-auto",
-                        isRTL ? "text-right flex-wrap-reverse" : "text-left flex-wrap"
-                      )}>
+                      <ul
+                        className={cn(
+                          'flex flex-col max-h-[calc(100vh-100px)] p-4 w-max h-auto',
+                          isRTL
+                            ? 'text-right flex-wrap-reverse'
+                            : 'text-left flex-wrap'
+                        )}
+                      >
                         {item.children.map((child, childIndex) => (
                           <ListItem
                             key={`child-${childIndex}`}
@@ -333,9 +360,18 @@ export function NavbarMenu({
                 );
               }
               return (
-                <NavigationMenuItem key={`left-${index}`} className="flex justify-center items-center">
-                  <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "px-4")}>
-                    <Link href={localizeHref(item.URL, locale)} className="flex items-center gap-2">
+                <NavigationMenuItem
+                  key={`left-${index}`}
+                  className="flex justify-center items-center"
+                >
+                  <NavigationMenuLink
+                    asChild
+                    className={cn(navigationMenuTriggerStyle(), 'px-4')}
+                  >
+                    <Link
+                      href={localizeHref(item.URL, locale)}
+                      className="flex items-center gap-2"
+                    >
                       <span>{item.text}</span>
                     </Link>
                   </NavigationMenuLink>
@@ -348,8 +384,13 @@ export function NavbarMenu({
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <button
-                    className={cn(navigationMenuTriggerStyle(), "cursor-pointer px-3")}
-                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      'cursor-pointer px-3'
+                    )}
+                    onClick={() =>
+                      setTheme(theme === 'dark' ? 'light' : 'dark')
+                    }
                   >
                     <div className="flex items-center gap-2 h-4 w-4">
                       <IconSun
@@ -398,13 +439,18 @@ export function NavbarMenu({
                             <Link
                               href={generateLocalizedPath(language.code)}
                               className={cn(
-                                "flex items-center justify-between w-full rounded-md p-2 hover:bg-accent hover:text-accent-foreground",
-                                isActive && "bg-accent text-accent-foreground"
+                                'flex items-center justify-between w-full rounded-md p-2 hover:bg-accent hover:text-accent-foreground',
+                                isActive && 'bg-accent text-accent-foreground'
                               )}
                             >
                               <div className="flex items-center gap-2">
                                 <span>{languageInfo.flag}</span>
-                                <span className={cn("text-sm", localeConfig.fontClass)}>
+                                <span
+                                  className={cn(
+                                    'text-sm',
+                                    localeConfig.fontClass
+                                  )}
+                                >
                                   {languageInfo.label}
                                 </span>
                               </div>
@@ -437,17 +483,18 @@ export function NavbarMenu({
                       </div>
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className={cn(
-                        "grid w-[400px] gap-3 p-4 lg:w-[500px] lg:grid-cols-2 xl:w-[600px]",
-                        isRTL ? "text-right" : "text-left"
-                      )}>
+                      <ul
+                        className={cn(
+                          'grid w-[400px] gap-3 p-4 lg:w-[500px] lg:grid-cols-2 xl:w-[600px]',
+                          isRTL ? 'text-right' : 'text-left'
+                        )}
+                      >
                         {item.children.map((child, childIndex) => (
                           <ListItem
                             key={`child-${childIndex}`}
                             title={child.text}
                             href={localizeHref(child.URL, locale)}
-                          >
-                          </ListItem>
+                          ></ListItem>
                         ))}
                       </ul>
                     </NavigationMenuContent>
@@ -456,8 +503,14 @@ export function NavbarMenu({
               }
               return (
                 <NavigationMenuItem key={`right-${index}`}>
-                  <NavigationMenuLink asChild className={cn(navigationMenuTriggerStyle(), "px-2")}>
-                    <Link href={localizeHref(item.URL, locale)} className="flex items-center gap-2">
+                  <NavigationMenuLink
+                    asChild
+                    className={cn(navigationMenuTriggerStyle(), 'px-2')}
+                  >
+                    <Link
+                      href={localizeHref(item.URL, locale)}
+                      className="flex items-center gap-2"
+                    >
                       {item.icon ? (
                         getIconForNavItem(item.text || '', item.icon)
                       ) : index === (rightNavbarItems?.length || 0) - 1 ? (
@@ -475,10 +528,18 @@ export function NavbarMenu({
         </NavigationMenu>
       </div>
     </>
-  )
+  );
 }
 
-function MobileNavItem({ item, locale, onClose }: { item: NavbarItem, locale: string, onClose?: () => void }) {
+function MobileNavItem({
+  item,
+  locale,
+  onClose,
+}: {
+  item: NavbarItem;
+  locale: string;
+  onClose?: () => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [animation, setAnimation] = useState(false);
   const hasChildren = item.children && item.children.length > 0;
@@ -491,42 +552,49 @@ function MobileNavItem({ item, locale, onClose }: { item: NavbarItem, locale: st
         <div
           className="flex items-center justify-between px-3 py-3 rounded-md hover:bg-accent cursor-pointer"
           onClick={(e) => {
-            onClose?.()
-            router.push(localizeHref(item.URL, locale))
+            onClose?.();
+            router.push(localizeHref(item.URL, locale));
           }}
         >
           <div className="flex items-center gap-2 font-medium">
             {getIconForNavItem(item.text || '', item.icon)}
             <span>{item.text}</span>
           </div>
-          <button className="rounded-full p-1.5 border border-border hover:border-primary 
+          <button
+            className="rounded-full p-1.5 border border-border hover:border-primary 
              text-muted-foreground hover:text-primary hover:bg-primary/10 
              active:scale-95 transition-all duration-200"
             onPointerDownCapture={(e) => e.stopPropagation()}
-
             onClick={(e) => {
-              e.stopPropagation()
+              e.stopPropagation();
               setIsOpen((prev) => {
-                return !prev
-              })
-            }}>
-
-            <IconPlus className={cn("h-4 w-4 transition-transform duration-300", isOpen && "rotate-180")} />
+                return !prev;
+              });
+            }}
+          >
+            <IconPlus
+              className={cn(
+                'h-4 w-4 transition-transform duration-300',
+                isOpen && 'rotate-180'
+              )}
+            />
           </button>
         </div>
         <AnimatePresence initial={false}>
           {isOpen && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
+              animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
               className="overflow-hidden"
             >
-              <div className={cn(
-                "flex flex-col gap-2 pb-2",
-                isRTL ? "border-r mr-2 pr-4" : "border-l ml-2 pl-4"
-              )}>
+              <div
+                className={cn(
+                  'flex flex-col gap-2 pb-2',
+                  isRTL ? 'border-r mr-2 pr-4' : 'border-l ml-2 pl-4'
+                )}
+              >
                 {item.children?.map((child, i) => (
                   <Link
                     key={i}
@@ -534,7 +602,7 @@ function MobileNavItem({ item, locale, onClose }: { item: NavbarItem, locale: st
                     onClick={onClose}
                     className="block px-3 py-3 text-sm hover:bg-accent rounded-md transition-colors text-right"
                   >
-                    <span style={{ unicodeBidi: "isolate", direction: "ltr" }}>
+                    <span style={{ unicodeBidi: 'isolate', direction: 'ltr' }}>
                       {child.text}
                     </span>
                   </Link>
@@ -544,7 +612,7 @@ function MobileNavItem({ item, locale, onClose }: { item: NavbarItem, locale: st
           )}
         </AnimatePresence>
       </div>
-    )
+    );
   }
 
   return (
@@ -556,5 +624,5 @@ function MobileNavItem({ item, locale, onClose }: { item: NavbarItem, locale: st
       {getIconForNavItem(item.text || '', item.icon)}
       <span>{item.text}</span>
     </Link>
-  )
+  );
 }

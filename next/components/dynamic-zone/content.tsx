@@ -2,7 +2,6 @@ import {
   type BlocksContent,
   BlocksRenderer,
 } from '@strapi/blocks-react-renderer';
-
 import { notFound } from 'next/navigation';
 
 import { Container } from '@/components/container';
@@ -21,7 +20,11 @@ export const Content = ({ content }: { content: BlocksContent }) => {
                 content={content}
                 blocks={{
                   image: ({ image }) => {
-                    const best = getBestFormat(image, ['medium', 'small', 'large']);
+                    const best = getBestFormat(image, [
+                      'medium',
+                      'small',
+                      'large',
+                    ]);
                     return (
                       <StrapiImage
                         src={best.url}

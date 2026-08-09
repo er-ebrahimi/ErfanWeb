@@ -1,14 +1,14 @@
 /**
  * Smoke Test: Homepage
- * 
+ *
  * Why: The homepage is the primary entry point for all visitors.
  * If it fails to load, every user sees a broken site.
- * 
+ *
  * Business risk: Complete loss of visitor acquisition and brand credibility.
  * Priority: P0 (Critical)
  */
-
 import { expect } from '@playwright/test';
+
 import { test } from '../../fixtures';
 import { HomepagePage } from '../../pages/homepage.page';
 import { NavbarPage } from '../../pages/navbar.page';
@@ -50,7 +50,9 @@ test.describe('Homepage', { tag: '@smoke' }, () => {
     expect(dir).toBe('rtl');
   });
 
-  test('navigation links are clickable and lead to valid pages', async ({ page }) => {
+  test('navigation links are clickable and lead to valid pages', async ({
+    page,
+  }) => {
     const links = await navbar.navLinks.all();
     for (const link of links) {
       const href = await link.getAttribute('href');

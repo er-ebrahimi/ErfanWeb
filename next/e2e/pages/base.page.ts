@@ -1,4 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
+
 import { LOCALE } from '../utils/constants';
 
 export abstract class BasePage {
@@ -8,7 +9,9 @@ export abstract class BasePage {
 
   async goto(): Promise<void> {
     await this.page.goto(this.path, { timeout: 15_000 }).catch(() => {});
-    await this.page.waitForLoadState('domcontentloaded', { timeout: 10_000 }).catch(() => {});
+    await this.page
+      .waitForLoadState('domcontentloaded', { timeout: 10_000 })
+      .catch(() => {});
   }
 
   get locale(): string {

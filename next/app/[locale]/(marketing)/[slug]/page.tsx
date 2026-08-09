@@ -1,10 +1,11 @@
-import { Metadata } from "next";
-import { draftMode } from "next/headers";
-import { notFound } from "next/navigation";
-import PageContent from "@/lib/shared/PageContent";
-import fetchContentType from "@/lib/strapi/fetchContentType";
-import { generateMetadataObject } from "@/lib/shared/metadata";
-import ClientSlugHandler from "../ClientSlugHandler";
+import { Metadata } from 'next';
+import { draftMode } from 'next/headers';
+import { notFound } from 'next/navigation';
+
+import ClientSlugHandler from '../ClientSlugHandler';
+import PageContent from '@/lib/shared/PageContent';
+import { generateMetadataObject } from '@/lib/shared/metadata';
+import fetchContentType from '@/lib/strapi/fetchContentType';
 
 export const revalidate = 60;
 
@@ -13,7 +14,7 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const params = await props.params;
   const pageData = await fetchContentType(
-    "pages",
+    'pages',
     {
       filters: {
         slug: params.slug,
@@ -33,7 +34,7 @@ export default async function Page(props: {
   const params = await props.params;
   const { isEnabled } = await draftMode();
   const pageData = await fetchContentType(
-    "pages",
+    'pages',
     {
       filters: {
         slug: params.slug,

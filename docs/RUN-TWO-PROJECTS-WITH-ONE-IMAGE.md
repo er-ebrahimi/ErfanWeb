@@ -1,5 +1,3 @@
-
-
 That works. You do not need two physical copies of the image. Docker can start many independent containers from one image.
 
 Important limitation: because `COPY . .` places the application code inside the image, both projects will have the same Strapi code, content types, plugins, and admin build. Their databases, uploads, environment variables, ports, and containers can be independent.
@@ -91,7 +89,7 @@ services:
       - ./.tmp:/opt/app/.tmp
 
     ports:
-      - "127.0.0.1:1338:1337"
+      - '127.0.0.1:1338:1337'
 
     networks:
       - studioarman-net
@@ -126,7 +124,7 @@ services:
       - ./.tmp:/opt/app/.tmp
 
     ports:
-      - "127.0.0.1:1337:1337"
+      - '127.0.0.1:1337:1337'
 
     networks:
       - painfools-net

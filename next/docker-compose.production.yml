@@ -3,7 +3,7 @@ services:
     image: web-blog:latest
     container_name: web-blog
     ports:
-      - "3000:4000"
+      - '3000:4000'
     env_file:
       - .env
     networks:

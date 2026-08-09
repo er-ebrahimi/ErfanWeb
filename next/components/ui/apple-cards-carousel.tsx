@@ -16,8 +16,8 @@ import React, {
   useState,
 } from 'react';
 
-import { useOutsideClick } from '@/hooks/use-outside-click';
 import { useLocaleConfig } from '@/hooks/use-locale-config';
+import { useOutsideClick } from '@/hooks/use-outside-click';
 import { cn } from '@/lib/utils';
 
 interface CarouselProps {
@@ -37,7 +37,7 @@ export const CarouselContext = createContext<{
   onCardClose: (index: number) => void;
   currentIndex: number;
 }>({
-  onCardClose: () => { },
+  onCardClose: () => {},
   currentIndex: 0,
 });
 
@@ -94,7 +94,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
   return (
     <CarouselContext.Provider
       value={{ onCardClose: handleCardClose, currentIndex }}
-    // value={{ onCardClose: () => {}, currentIndex: 0 }}
+      // value={{ onCardClose: () => {}, currentIndex: 0 }}
     >
       <div className="relative w-full">
         <div
@@ -213,7 +213,10 @@ export const Card = ({
     <>
       <AnimatePresence>
         {open && (
-          <div className="fixed inset-0 z-50 h-screen overflow-auto" dir={direction}>
+          <div
+            className="fixed inset-0 z-50 h-screen overflow-auto"
+            dir={direction}
+          >
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

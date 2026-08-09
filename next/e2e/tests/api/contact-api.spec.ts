@@ -1,14 +1,14 @@
 /**
  * API Test: Contact Form Endpoint
- * 
+ *
  * Why: Validates the contact API contract independently of the UI.
  * Tests validation logic, error responses, and payload structure.
- * 
+ *
  * Business risk: Broken API means all form submissions fail silently.
  * Priority: P1 (High)
  */
-
 import { expect } from '@playwright/test';
+
 import { test } from '../../fixtures';
 
 const CONTACT_API = '/api/contact';
@@ -53,7 +53,9 @@ test.describe('Contact API', { tag: '@api' }, () => {
     expect(body.success).toBe(false);
   });
 
-  test('returns structured error response with Farsi message', async ({ request }) => {
+  test('returns structured error response with Farsi message', async ({
+    request,
+  }) => {
     const response = await request.post(CONTACT_API, {
       data: {
         contact: '',

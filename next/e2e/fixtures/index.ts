@@ -1,4 +1,4 @@
-import { test as base, type Page } from '@playwright/test';
+import { type Page, test as base } from '@playwright/test';
 
 type Mocks = {
   mockContactApi: void;
@@ -20,7 +20,10 @@ export const test = base.extend<Mocks & Pages>({
   },
 });
 
-async function setupContactApiMock(page: Page, success: boolean): Promise<void> {
+async function setupContactApiMock(
+  page: Page,
+  success: boolean
+): Promise<void> {
   await page.route('**/api/contact', async (route) => {
     if (route.request().method() !== 'POST') {
       await route.continue();

@@ -1,6 +1,7 @@
 import { User } from '@/context/auth-context';
 
-const API_URL = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
+const API_URL =
+  process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
 
 export interface LoginCredentials {
   identifier: string;

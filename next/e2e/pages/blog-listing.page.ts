@@ -1,6 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
-import { BasePage } from './base.page';
+
 import { ROUTES } from '../utils/constants';
+import { BasePage } from './base.page';
 
 export class BlogListingPage extends BasePage {
   constructor(page: Page) {
@@ -56,6 +57,8 @@ export class BlogListingPage extends BasePage {
 
   async clickFirstArticle(): Promise<void> {
     await this.firstArticleLink.click();
-    await this.page.waitForLoadState('networkidle', { timeout: 10_000 }).catch(() => {});
+    await this.page
+      .waitForLoadState('networkidle', { timeout: 10_000 })
+      .catch(() => {});
   }
 }

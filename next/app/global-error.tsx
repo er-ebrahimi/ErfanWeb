@@ -55,7 +55,13 @@ export default function GlobalError({
             >
               متأسفانه مشکلی در سرور رخ داده است. لطفاً مجدداً تلاش کنید.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.75rem',
+              }}
+            >
               <button
                 onClick={() => reset()}
                 style={{

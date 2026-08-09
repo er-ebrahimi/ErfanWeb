@@ -142,9 +142,9 @@ See **Docker build & deploy** section below for the current deployment flow.
 
 | Var                      | Prefixed?      | Inlined at build? | Purpose                                              | Local (Docker)                     | Server                          |
 | ------------------------ | -------------- | :---------------: | ---------------------------------------------------- | ---------------------------------- | ------------------------------- |
-| `STRAPI_INTERNAL_URL`    | No             |     ❌ Runtime     | Server API calls (fetchContentType, auth, redirects) | `http://host.docker.internal:1337` | `https://studioarman.site:2087` |
-| `NEXT_PUBLIC_API_URL`    | `NEXT_PUBLIC_` |       ✅ Yes       | Client auth calls (auth-context.tsx)                 | `http://localhost:1337`            | `https://studioarman.site:2087` |
-| `NEXT_PUBLIC_STRAPI_URL` | `NEXT_PUBLIC_` |       ✅ Yes       | Browser-facing image URLs                            | `http://localhost:1337`            | `https://studioarman.site:2087` |
+| `STRAPI_INTERNAL_URL`    | No             |    ❌ Runtime     | Server API calls (fetchContentType, auth, redirects) | `http://host.docker.internal:1337` | `https://studioarman.site:2087` |
+| `NEXT_PUBLIC_API_URL`    | `NEXT_PUBLIC_` |      ✅ Yes       | Client auth calls (auth-context.tsx)                 | `http://localhost:1337`            | `https://studioarman.site:2087` |
+| `NEXT_PUBLIC_STRAPI_URL` | `NEXT_PUBLIC_` |      ✅ Yes       | Browser-facing image URLs                            | `http://localhost:1337`            | `https://studioarman.site:2087` |
 
 `NEXT_PUBLIC_*` vars are **baked into the JS bundle at build time** — changing them requires a rebuild.  
 `STRAPI_INTERNAL_URL` is read from `process.env` at runtime — change it in `.env.local` and restart the container.
@@ -160,12 +160,14 @@ See **Docker build & deploy** section below for the current deployment flow.
 **One-line brand switch:** `NEXT_PUBLIC_SITE_ID=site-b` → rebuild → new colors everywhere.
 
 **How it works:**
+
 - `next/app/layout.tsx` reads `NEXT_PUBLIC_SITE_ID` and adds `theme-<id>` class to `<html>`.
 - `next/app/themes.css` defines per-product CSS variable overrides (`.theme-site-b`, `.theme-site-b.dark`, etc.).
 - Default values live in `:root` / `.dark` in `next/app/globals.css` (= site-a).
 - `generateViewport()` picks the theme-color meta tag per product.
 
 **To add a new product theme:**
+
 1. Add a block in `next/app/themes.css` (`.theme-site-c`, `.theme-site-c.dark` — all shadcn tokens).
 2. Add favicon set in `public/favicon-sets/site-c/`.
 3. Deploy with `NEXT_PUBLIC_SITE_ID=site-c`.
@@ -173,6 +175,7 @@ See **Docker build & deploy** section below for the current deployment flow.
 See `next/docs/THEME_IMPLEMENTATION.md` for full details.
 
 ### Build & save image (local machine)
+
 ```bash
 cd next
 docker compose -f docker-compose.dev.yml build
@@ -180,6 +183,7 @@ docker save -o web-blog.tar web-blog:latest
 ```
 
 ### Deploy to server
+
 ```bash
 # Copy the tar to the server, then:
 docker load -i web-blog.tar
@@ -188,13 +192,14 @@ docker compose down    # stop
 ```
 
 ### Server docker-compose.yml
+
 ```yaml
 services:
   app:
     image: web-blog:latest
     container_name: web-blog
     ports:
-      - "3000:4000"
+      - '3000:4000'
     env_file:
       - .env.local
     dns:
@@ -202,12 +207,13 @@ services:
       - 185.51.200.2
       - 185.8.174.140
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - 'host.docker.internal:host-gateway'
 ```
 
 > **Why `dns` is needed:** Without explicit DNS, the container may fail to resolve `studioarman.site` (`EAI_AGAIN`). The public IP `185.239.3.14` is reachable from inside the container only via DNS resolution of the domain.
 
 ### Server .env.local
+
 ```
 WEBSITE_URL=http://localhost:3000
 PORT=4000
@@ -221,6 +227,7 @@ IMAGE_HOSTNAME=studioarman.site:2087
 ```
 
 ### Architecture notes (Docker)
+
 - The server has **no Node.js** — everything (Strapi, Next.js, backups) runs in Docker containers, not directly on the host.
 - Nginx proxies `https://studioarman.site:2087` → `http://127.0.0.1:1337` (Strapi container).
 - The Next.js container connects to Strapi via Nginx at `https://studioarman.site:2087`.

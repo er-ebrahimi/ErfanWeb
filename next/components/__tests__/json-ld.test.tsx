@@ -1,14 +1,14 @@
-import { describe, it, expect, vi } from 'vitest';
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
+import { describe, expect, it, vi } from 'vitest';
+
+import { JsonLd } from '../json-ld';
 
 vi.mock('next/script', () => ({
   default: function MockScript({ id, type, dangerouslySetInnerHTML }: any) {
     return React.createElement('script', { id, type, dangerouslySetInnerHTML });
   },
 }));
-
-import { JsonLd } from '../json-ld';
 
 const validStructuredData = {
   '@context': 'https://schema.org',
@@ -42,18 +42,29 @@ describe('JsonLd', () => {
 
   it('renders nothing when seo is null', () => {
     const { container } = render(React.createElement(JsonLd, { seo: null }));
-    const scripts = container.querySelectorAll('script[type="application/ld+json"]');
+    const scripts = container.querySelectorAll(
+      'script[type="application/ld+json"]'
+    );
     expect(scripts.length).toBe(0);
   });
 
   it('renders nothing when seo has no structuredData', () => {
-    const { container } = render(React.createElement(JsonLd, { seo: seoWithoutStructuredData }));
-    const scripts = container.querySelectorAll('script[type="application/ld+json"]');
+    const { container } = render(
+      React.createElement(JsonLd, { seo: seoWithoutStructuredData })
+    );
+    const scripts = container.querySelectorAll(
+      'script[type="application/ld+json"]'
+    );
     expect(scripts.length).toBe(0);
   });
 
   it('uses custom id prop', () => {
-    render(React.createElement(JsonLd, { seo: seoWithData, id: 'global-structured-data' }));
+    render(
+      React.createElement(JsonLd, {
+        seo: seoWithData,
+        id: 'global-structured-data',
+      })
+    );
 
     const script = document.querySelector('script[type="application/ld+json"]');
     expect(script?.getAttribute('id')).toBe('global-structured-data');

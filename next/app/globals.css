@@ -95,8 +95,8 @@
     font-family: var(--font-geist-sans), var(--font-iransans), sans-serif;
   }
 
-  html[lang="fa"] body,
-  html[lang="ar"] body {
+  html[lang='fa'] body,
+  html[lang='ar'] body {
     font-family: var(--font-iransans), var(--font-geist-sans), sans-serif;
   }
 }

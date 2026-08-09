@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+
 import { test } from '../../fixtures';
 
 test.describe('Structured Data from Sitemap', { tag: '@regression' }, () => {
@@ -19,7 +20,9 @@ test.describe('Structured Data from Sitemap', { tag: '@regression' }, () => {
     sitemapUrls = locs;
   });
 
-  test('pages with structured data render JSON-LD script tags', async ({ page }) => {
+  test('pages with structured data render JSON-LD script tags', async ({
+    page,
+  }) => {
     test.setTimeout(120_000);
     const urlsToCheck = sitemapUrls.slice(0, 1000);
     test.skip(urlsToCheck.length === 0, 'No sitemap URLs to check');
@@ -29,13 +32,17 @@ test.describe('Structured Data from Sitemap', { tag: '@regression' }, () => {
 
     for (const url of urlsToCheck) {
       const path = new URL(url).pathname;
-      const response = await page.goto(path, { waitUntil: 'domcontentloaded', timeout: 15_000 }).catch(() => null);
+      const response = await page
+        .goto(path, { waitUntil: 'domcontentloaded', timeout: 15_000 })
+        .catch(() => null);
       if (!response?.ok()) continue;
 
       pagesChecked++;
 
       const jsonLdScripts = await page.evaluate(() => {
-        const scripts = document.querySelectorAll('script[type="application/ld+json"]');
+        const scripts = document.querySelectorAll(
+          'script[type="application/ld+json"]'
+        );
         return Array.from(scripts).map((s) => ({
           id: s.getAttribute('id'),
           content: s.textContent || '',
@@ -48,20 +55,29 @@ test.describe('Structured Data from Sitemap', { tag: '@regression' }, () => {
 
       for (const script of jsonLdScripts) {
         let parsed: any;
-        expect.soft(
-          (() => { parsed = JSON.parse(script.content); return true; })(),
-          `${path} has invalid JSON in <script id="${script.id}">`
-        ).toBe(true);
+        expect
+          .soft(
+            (() => {
+              parsed = JSON.parse(script.content);
+              return true;
+            })(),
+            `${path} has invalid JSON in <script id="${script.id}">`
+          )
+          .toBe(true);
 
         if (parsed) {
-          expect.soft(
-            parsed['@context'],
-            `${path} script id="${script.id}" missing @context`
-          ).toBeTruthy();
-          expect.soft(
-            parsed['@type'],
-            `${path} script id="${script.id}" missing @type`
-          ).toBeTruthy();
+          expect
+            .soft(
+              parsed['@context'],
+              `${path} script id="${script.id}" missing @context`
+            )
+            .toBeTruthy();
+          expect
+            .soft(
+              parsed['@type'],
+              `${path} script id="${script.id}" missing @type`
+            )
+            .toBeTruthy();
         }
       }
     }

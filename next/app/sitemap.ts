@@ -12,7 +12,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let blogArticles: any[] = [];
   try {
-    const res = await fetchContentType('articles', { pagination: { pageSize: 1000 }, fields: ['slug', 'updatedAt', 'publishedAt'], populate: false, status: 'published' }, false);
+    const res = await fetchContentType(
+      'articles',
+      {
+        pagination: { pageSize: 1000 },
+        fields: ['slug', 'updatedAt', 'publishedAt'],
+        populate: false,
+        status: 'published',
+      },
+      false
+    );
     const articles: any[] = res?.data ?? [];
     blogArticles = articles.filter((a: any) => a.slug?.includes('blog'));
 
@@ -27,12 +36,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           priority: 1.0,
         },
         ...(hasBlog
-          ? [{
-              url: `${BASE_URL}/${locale}/category/blog`,
-              lastModified: new Date(),
-              changeFrequency: 'weekly' as const,
-              priority: 0.8,
-            }]
+          ? [
+              {
+                url: `${BASE_URL}/${locale}/category/blog`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly' as const,
+                priority: 0.8,
+              },
+            ]
           : [])
       );
     }

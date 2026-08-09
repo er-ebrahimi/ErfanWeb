@@ -2,7 +2,11 @@ import localFont from 'next/font/local';
 
 export const iranSans = localFont({
   src: [
-    { path: '../fonts/fa/IRANSans_UltraLight.ttf', weight: '100', style: 'normal' },
+    {
+      path: '../fonts/fa/IRANSans_UltraLight.ttf',
+      weight: '100',
+      style: 'normal',
+    },
     { path: '../fonts/fa/IRANSans_Light.ttf', weight: '300', style: 'normal' },
     { path: '../fonts/fa/IRANSansWeb.ttf', weight: '400', style: 'normal' },
     { path: '../fonts/fa/IRANSans_Medium.ttf', weight: '500', style: 'normal' },
@@ -18,7 +22,11 @@ export const iranSans = localFont({
 export const geistSans = localFont({
   src: [
     { path: '../fonts/en/Geist-Thin.ttf', weight: '100', style: 'normal' },
-    { path: '../fonts/en/Geist-ExtraLight.ttf', weight: '200', style: 'normal' },
+    {
+      path: '../fonts/en/Geist-ExtraLight.ttf',
+      weight: '200',
+      style: 'normal',
+    },
     { path: '../fonts/en/Geist-Light.ttf', weight: '300', style: 'normal' },
     { path: '../fonts/en/Geist-Regular.ttf', weight: '400', style: 'normal' },
     { path: '../fonts/en/Geist-Medium.ttf', weight: '500', style: 'normal' },
@@ -33,7 +41,10 @@ export const geistSans = localFont({
   fallback: ['system-ui', 'sans-serif'],
 });
 
-export const fontConfig: Record<string, { variable: string; dir: 'ltr' | 'rtl' }> = {
+export const fontConfig: Record<
+  string,
+  { variable: string; dir: 'ltr' | 'rtl' }
+> = {
   fa: { variable: '--font-iransans', dir: 'rtl' },
   ar: { variable: '--font-iransans', dir: 'rtl' },
 };

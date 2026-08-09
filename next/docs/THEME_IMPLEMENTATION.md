@@ -125,11 +125,11 @@ app/themes.css:  .theme-site-b { --primary: oklch(...); }
 
 ### File structure
 
-| File | Purpose |
-|------|---------|
-| `app/globals.css` | Base `:root` / `.dark` (default = site-a). Structural styles only. |
-| `app/themes.css` | Per-product CSS variable overrides, scoped under `.theme-<id>` classes. |
-| `app/layout.tsx` | Reads `NEXT_PUBLIC_SITE_ID`, applies `theme-<id>` class to `<html>`. |
+| File              | Purpose                                                                 |
+| ----------------- | ----------------------------------------------------------------------- |
+| `app/globals.css` | Base `:root` / `.dark` (default = site-a). Structural styles only.      |
+| `app/themes.css`  | Per-product CSS variable overrides, scoped under `.theme-<id>` classes. |
+| `app/layout.tsx`  | Reads `NEXT_PUBLIC_SITE_ID`, applies `theme-<id>` class to `<html>`.    |
 
 ### Adding a new product theme
 

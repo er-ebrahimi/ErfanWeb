@@ -1,4 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
+
 import { BasePage } from './base.page';
 
 export class ContactPage extends BasePage {
@@ -49,7 +50,9 @@ export class ContactPage extends BasePage {
 
   async submit(): Promise<void> {
     await this.submitButton.click();
-    await this.page.waitForLoadState('networkidle', { timeout: 10_000 }).catch(() => {});
+    await this.page
+      .waitForLoadState('networkidle', { timeout: 10_000 })
+      .catch(() => {});
   }
 
   async isSubmitting(): Promise<boolean> {

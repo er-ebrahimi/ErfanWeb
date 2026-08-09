@@ -40,7 +40,7 @@ const ProjectPictures: React.FC<ProjectPicturesProps> = ({
         <p className="absolute top-1/2 mx-auto max-w-sm -translate-y-3/4 text-center text-2xl font-bold text-muted-foreground md:text-4xl">
           {Description}
         </p>
-          {Pics.map((item) => {
+        {Pics.map((item) => {
           const img = item.Image?.[0];
           const best = img ? getBestFormat(img) : null;
           return (

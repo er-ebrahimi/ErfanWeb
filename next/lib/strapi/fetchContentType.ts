@@ -39,7 +39,8 @@ export default async function fetchContentType(
     }
   }
 
-  const apiUrl = process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl =
+    process.env.STRAPI_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL;
   const url = new URL(`api/${contentType}`, apiUrl);
   url.search = qs.stringify(queryParams as any);
 
@@ -50,13 +51,17 @@ export default async function fetchContentType(
       signal: AbortSignal.timeout(10000),
     });
   } catch {
-    console.warn(`fetchContentType: "${contentType}" unreachable, returning null`);
+    console.warn(
+      `fetchContentType: "${contentType}" unreachable, returning null`
+    );
     return null;
   }
 
   if (!res.ok) {
     if (res.status === 404 || res.status === 403) {
-      console.warn(`fetchContentType: "${contentType}" not found (${res.status})`);
+      console.warn(
+        `fetchContentType: "${contentType}" not found (${res.status})`
+      );
       return null;
     }
     throw new Error(

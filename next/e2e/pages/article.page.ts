@@ -1,6 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
-import { BasePage } from './base.page';
+
 import { ROUTES } from '../utils/constants';
+import { BasePage } from './base.page';
 
 export class ArticlePage extends BasePage {
   constructor(page: Page) {
@@ -12,8 +13,12 @@ export class ArticlePage extends BasePage {
   }
 
   async gotoBySlug(slug: string): Promise<void> {
-    await this.page.goto(`${ROUTES.home}/category/${slug}`, { timeout: 15_000 }).catch(() => {});
-    await this.page.waitForLoadState('domcontentloaded', { timeout: 10_000 }).catch(() => {});
+    await this.page
+      .goto(`${ROUTES.home}/category/${slug}`, { timeout: 15_000 })
+      .catch(() => {});
+    await this.page
+      .waitForLoadState('domcontentloaded', { timeout: 10_000 })
+      .catch(() => {});
   }
 
   get title(): Locator {

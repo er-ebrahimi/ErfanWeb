@@ -7,8 +7,8 @@ import { Button } from '../elements/button';
 import { Heading } from '../elements/heading';
 import { Subheading } from '../elements/subheading';
 import { StrapiImage } from '../ui/strapi-image';
-import { cn } from '@/lib/utils';
 import { localizeHref } from '@/lib/url';
+import { cn } from '@/lib/utils';
 
 export const Hero = ({
   heading,
@@ -36,7 +36,7 @@ export const Hero = ({
               fill
               className="object-cover brightness-[0.6]"
               // loading="lazy"
-              sizes='100vw'
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-background/70" />
           </>
@@ -49,7 +49,10 @@ export const Hero = ({
       </div>
       <Heading
         as="h1"
-        className={cn("text-4xl md:text-4xl lg:text-6xl text-foreground font-semibold max-w-7xl mx-auto text-center mt-6 relative z-10  py-6 text-white", "!leading-relaxed")}
+        className={cn(
+          'text-4xl md:text-4xl lg:text-6xl text-foreground font-semibold max-w-7xl mx-auto text-center mt-6 relative z-10  py-6 text-white',
+          '!leading-relaxed'
+        )}
       >
         {heading}
       </Heading>

@@ -30,18 +30,19 @@ const PromisedLand: React.FC<PromisedLandProps> = ({
   const cards = Promise.map((card, index) => {
     const best = card.Pic ? getBestFormat(card.Pic) : null;
     return (
-    <Card
-      key={card.Link}
-      card={{
-        title: card.Subtitle,
-        src: best ? getStrapiMedia(best.url)! : '/next.svg',
-        category: card.SubSubtitle,
-        content: card.Description,
-        link: card.Link,
-      }}
-      index={index}
-    />
-  )});
+      <Card
+        key={card.Link}
+        card={{
+          title: card.Subtitle,
+          src: best ? getStrapiMedia(best.url)! : '/next.svg',
+          category: card.SubSubtitle,
+          content: card.Description,
+          link: card.Link,
+        }}
+        index={index}
+      />
+    );
+  });
   return (
     <div
       className="w-full h-full my-32 flex justify-center flex-col items-center"
@@ -51,10 +52,14 @@ const PromisedLand: React.FC<PromisedLandProps> = ({
         dir={direction}
         className="mx-8 flex justify-center flex-col items-center max-w-4xl gap-4"
       >
-        <h2 className={`max-w-7xl pl-4 mx-auto text-2xl md:text-4xl font-bold text-foreground text-center ${fontClass}`}>
+        <h2
+          className={`max-w-7xl pl-4 mx-auto text-2xl md:text-4xl font-bold text-foreground text-center ${fontClass}`}
+        >
           {Title}
         </h2>
-        <p className={`max-w-7xl pt-4 pl-4 mx-auto text-sm md:text-base text-muted-foreground text-center ${fontClass}`}>
+        <p
+          className={`max-w-7xl pt-4 pl-4 mx-auto text-sm md:text-base text-muted-foreground text-center ${fontClass}`}
+        >
           {Description}
         </p>
       </div>

@@ -122,7 +122,7 @@ From the messenger chat, download **all** `part…` files into one folder. The b
 
 ### 2. Reassemble the zip
 
-> ⚠️ **A part is not a zip.** The zip's file index lives at the very end of the file, so no single `partNNNN.zip` can be opened on its own — Windows reports *"unexpected end of archive"*. Put **all** parts in one folder, reassemble them **in order**, then open the result.
+> ⚠️ **A part is not a zip.** The zip's file index lives at the very end of the file, so no single `partNNNN.zip` can be opened on its own — Windows reports _"unexpected end of archive"_. Put **all** parts in one folder, reassemble them **in order**, then open the result.
 
 **Linux / macOS:**
 
@@ -177,19 +177,19 @@ To restore into Strapi, stop Strapi, replace `strapi/.tmp/data.db` and `strapi/p
 
 All settings are env vars, read from `strapi/.env` (via `--env-file-if-exists`) and/or the environment.
 
-| Var | Default | Purpose |
-| --- | --- | --- |
-| `BALE_TOKEN` | – | Bale bot token; if set, Bale gets a copy |
-| `TELEGRAM_TOKEN` | – | Telegram bot token; if set, Telegram gets a copy |
-| `BACKUP_CHAT_ID` | – | Target chat for both messengers |
-| `BACKUP_DB_PATH` | `strapi/.tmp/data.db` | SQLite file to snapshot |
-| `BACKUP_PUBLIC_DIR` | `strapi/public` | Folder to include (media/static files) |
-| `BACKUP_KEEP_DIR` | `strapi/.tmp/backups` | Where the last zip is kept locally |
-| `BACKUP_KEEP` | `3` | How many local zips to keep |
-| `BACKUP_CHUNK_MB` | `44` | Chunk size per part (keep < 50) |
+| Var                 | Default               | Purpose                                          |
+| ------------------- | --------------------- | ------------------------------------------------ |
+| `BALE_TOKEN`        | –                     | Bale bot token; if set, Bale gets a copy         |
+| `TELEGRAM_TOKEN`    | –                     | Telegram bot token; if set, Telegram gets a copy |
+| `BACKUP_CHAT_ID`    | –                     | Target chat for both messengers                  |
+| `BACKUP_DB_PATH`    | `strapi/.tmp/data.db` | SQLite file to snapshot                          |
+| `BACKUP_PUBLIC_DIR` | `strapi/public`       | Folder to include (media/static files)           |
+| `BACKUP_KEEP_DIR`   | `strapi/.tmp/backups` | Where the last zip is kept locally               |
+| `BACKUP_KEEP`       | `3`                   | How many local zips to keep                      |
+| `BACKUP_CHUNK_MB`   | `44`                  | Chunk size per part (keep < 50)                  |
 
 ## Notes / gotchas
 
 - The script targets a **SQLite** DB (Strapi default). If your Strapi uses MySQL/Postgres, this script won't find a `.db` file — set `BACKUP_DB_PATH` accordingly or extend it.
 - Zip of a large media library can take a while; upload of N chunks is sequential on purpose to stay well under the 50 MB limit and avoid 429 rate-limit errors.
-- The 50 MB limit is a *storage* cap on Bale and an *upload* cap on the Telegram Bot API. 44 MB default keeps multipart overhead clear of it.
+- The 50 MB limit is a _storage_ cap on Bale and an _upload_ cap on the Telegram Bot API. 44 MB default keeps multipart overhead clear of it.

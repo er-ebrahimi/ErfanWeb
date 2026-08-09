@@ -24,7 +24,12 @@ export const Media = ({ media }: MediaProps) => {
     <Container className="py-2 flex justify-center">
       <div
         className="w-full max-w-2xl"
-        style={{ aspectRatio: mediaItem.width && mediaItem.height ? `${mediaItem.width}/${mediaItem.height}` : '16/9' }}
+        style={{
+          aspectRatio:
+            mediaItem.width && mediaItem.height
+              ? `${mediaItem.width}/${mediaItem.height}`
+              : '16/9',
+        }}
       >
         <video
           controls

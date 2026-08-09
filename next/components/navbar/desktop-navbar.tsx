@@ -14,8 +14,8 @@ import { ThemeToggle } from '../theme-toggle';
 import { NavbarItem } from './navbar-item';
 import { Button } from '@/components/elements/button';
 import { Logo } from '@/components/logo';
-import { cn } from '@/lib/utils';
 import { localizeHref } from '@/lib/url';
+import { cn } from '@/lib/utils';
 
 type Props = {
   leftNavbarItems: {

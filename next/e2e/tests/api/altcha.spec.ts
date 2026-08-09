@@ -1,15 +1,15 @@
 /**
  * API Test: ALTCHA Challenge Endpoint
- * 
+ *
  * Why: ALTCHA protects the contact form from spam bots.
  * If the challenge endpoint is broken, the contact form becomes
  * unusable or vulnerable to spam.
- * 
+ *
  * Business risk: Form spam or broken contact functionality.
  * Priority: P1 (High)
  */
-
 import { expect } from '@playwright/test';
+
 import { test } from '../../fixtures';
 
 const ALTCHA_CHALLENGE_URL = '/api/altcha/challenge';

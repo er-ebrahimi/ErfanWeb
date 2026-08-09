@@ -10,8 +10,8 @@ import { AmbientColor } from '../decorations/ambient-color';
 import { Button } from '../elements/button';
 import { StrapiImage } from '../ui/strapi-image';
 import { useLocaleConfig } from '@/hooks/use-locale-config';
-import { cn } from '@/lib/utils';
 import { localizeHref } from '@/lib/url';
+import { cn } from '@/lib/utils';
 
 export const CTA = ({
   heading,

@@ -5,8 +5,8 @@ import { Button } from '../elements/button';
 import { Heading } from '../elements/heading';
 import { Subheading } from '../elements/subheading';
 import { getBestFormat, getStrapiMedia } from '@/components/ui/strapi-image';
-import { StrapiImage } from '@/types/types';
 import { localizeHref } from '@/lib/url';
+import { StrapiImage } from '@/types/types';
 
 type CTA = {
   id: string;

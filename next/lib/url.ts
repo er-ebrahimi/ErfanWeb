@@ -1,6 +1,6 @@
 export function localizeHref(
   url: string | undefined | null,
-  locale: string,
+  locale: string
 ): string {
   if (!url) return `/${locale}`;
   if (url.startsWith('http')) return url;

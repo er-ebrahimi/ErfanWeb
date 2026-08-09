@@ -8,8 +8,8 @@ import { useRef, useState } from 'react';
 import { Heading } from '../elements/heading';
 import { Subheading } from '../elements/subheading';
 import { FeatureIconContainer } from './features/feature-icon-container';
-import { ThreeDCard } from '@/components/ui/three-d-card';
 import { getBestFormat, getStrapiMedia } from '@/components/ui/strapi-image';
+import { ThreeDCard } from '@/components/ui/three-d-card';
 
 export const LaunchesCard = ({
   heading,

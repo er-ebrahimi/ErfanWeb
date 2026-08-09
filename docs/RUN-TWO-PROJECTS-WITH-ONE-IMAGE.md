@@ -173,33 +173,3 @@ Expected result:
 studioarman-strapi   studioarman-strapi-prod:latest   127.0.0.1:1338->1337
 painfools-strapi     painfools-strapi-prod:latest     127.0.0.1:1337->1337
 ```
-
-## Important Dockerfile correction
-
-Your production image currently runs:
-
-```dockerfile
-CMD ["yarn", "develop"]
-```
-
-That is development mode. For production, change it to:
-
-```dockerfile
-CMD ["yarn", "start"]
-```
-
-Also change:
-
-```dockerfile
-ARG NODE_ENV=development
-```
-
-to:
-
-```dockerfile
-ARG NODE_ENV=production
-```
-
-Then rebuild and transfer the corrected image.
-
-Final result: same application code, but separate containers, databases, uploads, environment files, ports, and networks. If StudioArman and PainFools need different Strapi code or content-type schemas, then they require separate image builds—not merely different tags.

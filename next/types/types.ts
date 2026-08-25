@@ -64,6 +64,37 @@ export interface Product {
   categories?: Category[];
 }
 
+export interface PortfolioSkill {
+  name: string;
+}
+
+export interface PortfolioSocialLink {
+  name: string;
+  url: string;
+  icon?: string;
+}
+
+export interface PortfolioParagraph {
+  text: string;
+}
+
+export interface Portfolio {
+  id: number;
+  documentId?: string;
+  title: string;
+  description: string;
+  slug: string;
+  type: 'project' | 'side-project';
+  tag?: string;
+  link?: string;
+  link_text?: string;
+  technologies: PortfolioSkill[];
+  card_image?: StrapiImage;
+  featured?: boolean;
+  locale: string;
+  localizations?: any[];
+}
+
 export interface StrapiImage {
   id: number;
   documentId: string;

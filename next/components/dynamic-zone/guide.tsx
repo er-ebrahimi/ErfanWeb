@@ -10,7 +10,7 @@ const getImageUrl = (profile: any) => {
   if (profile && typeof profile.url === 'string') {
     return url + profile.url;
   }
-  return '/next.svg'; // fallback image
+  return '/empty.webp'; // fallback image
 };
 
 interface GuideProps {
@@ -32,7 +32,7 @@ const Guide: React.FC<GuideProps> = ({ Title, Description, Profile }) => {
             width={240}
             height={240}
             onError={(e) => {
-              (e.target as HTMLImageElement).src = '/next.svg';
+              (e.target as HTMLImageElement).src = '/empty.webp';
             }}
           />
         </div>

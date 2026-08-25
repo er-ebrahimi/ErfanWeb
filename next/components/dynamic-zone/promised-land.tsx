@@ -34,7 +34,7 @@ const PromisedLand: React.FC<PromisedLandProps> = ({
         key={card.Link}
         card={{
           title: card.Subtitle,
-          src: best ? getStrapiMedia(best.url)! : '/next.svg',
+          src: best ? getStrapiMedia(best.url)! : '/empty.webp',
           category: card.SubSubtitle,
           content: card.Description,
           link: card.Link,

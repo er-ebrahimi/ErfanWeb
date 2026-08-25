@@ -5,7 +5,7 @@ import { Timeline } from '@/components/ui/timeline';
 
 const getImageUrl = (pic: any) => {
   const base = process.env.NEXT_PUBLIC_STRAPI_URL || '';
-  if (!pic) return '/next.svg';
+  if (!pic) return '/empty.webp';
   const attrs = pic?.attributes ?? pic?.data?.attributes ?? pic;
 
   const path =
@@ -14,7 +14,7 @@ const getImageUrl = (pic: any) => {
     attrs?.formats?.small?.url ??
     attrs?.url;
 
-  if (!path || typeof path !== 'string') return '/next.svg';
+  if (!path || typeof path !== 'string') return '/empty.webp';
 
   if (path.startsWith('http')) return path;
   if (path.startsWith('/')) return base + path;
@@ -82,7 +82,7 @@ const Plans: React.FC<PlansProps> = ({ Title, Description, Plan, locale }) => {
                         width={500}
                         height={500}
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/next.svg';
+                          (e.target as HTMLImageElement).src = '/empty.webp';
                         }}
                       />
                     ))}

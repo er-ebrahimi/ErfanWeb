@@ -2,7 +2,7 @@ export function clientStrapiImage(url: string): string {
   const base = process.env.NEXT_PUBLIC_STRAPI_URL;
 
   if (url.startsWith('/')) {
-    return (base || '') + url;
+    return (base || '').replace(/\/$/, '') + url;
   }
 
   if (url.startsWith('http') && base) {

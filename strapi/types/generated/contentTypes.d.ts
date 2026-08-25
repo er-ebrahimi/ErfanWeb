@@ -792,6 +792,9 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'dynamic-zone.contact',
         'dynamic-zone.team-members',
         'dynamic-zone.hero-picture',
+        'dynamic-zone.portfolio-hero',
+        'dynamic-zone.portfolio-about',
+        'dynamic-zone.portfolio-projects',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -849,6 +852,84 @@ export interface ApiPlanPlan extends Struct.CollectionTypeSchema {
     product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     sub_text: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPortfolioPortfolio extends Struct.CollectionTypeSchema {
+  collectionName: 'portfolios';
+  info: {
+    description: '';
+    displayName: 'Portfolios';
+    pluralName: 'portfolios';
+    singularName: 'portfolio';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    card_image: Schema.Attribute.Media<'images'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    link: Schema.Attribute.Text;
+    link_text: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::portfolio.portfolio'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    tag: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    technologies: Schema.Attribute.Component<'portfolio.skill', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    type: Schema.Attribute.Enumeration<['project', 'side-project']> &
+      Schema.Attribute.DefaultTo<'project'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1560,6 +1641,7 @@ declare module '@strapi/strapi' {
       'api::logo.logo': ApiLogoLogo;
       'api::page.page': ApiPagePage;
       'api::plan.plan': ApiPlanPlan;
+      'api::portfolio.portfolio': ApiPortfolioPortfolio;
       'api::product-page.product-page': ApiProductPageProductPage;
       'api::product.product': ApiProductProduct;
       'api::redirection.redirection': ApiRedirectionRedirection;

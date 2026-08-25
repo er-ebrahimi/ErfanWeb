@@ -27,7 +27,7 @@ export const Hero = ({
 
   return (
     <div className=" h-screen dark:m-0 dark:rounded-none overflow-hidden bg-background relative flex flex-col items-center justify-center bg-black">
-      <div>
+      <div className="absolute inset-0 overflow-hidden">
         {backgroundImage ? (
           <>
             <StrapiImage

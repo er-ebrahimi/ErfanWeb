@@ -283,6 +283,58 @@ export interface DynamicZonePlans extends Struct.ComponentSchema {
   };
 }
 
+export interface DynamicZonePortfolioAbout extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_portfolio_abouts';
+  info: {
+    description: '';
+    displayName: 'Portfolio About';
+    icon: 'information';
+  };
+  attributes: {
+    about_image: Schema.Attribute.Media<'images'>;
+    about_intro: Schema.Attribute.Text;
+    about_paragraphs: Schema.Attribute.Component<'portfolio.paragraph', true>;
+    heading: Schema.Attribute.Text;
+    skills: Schema.Attribute.Component<'portfolio.skill', true>;
+  };
+}
+
+export interface DynamicZonePortfolioHero extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_portfolio_heroes';
+  info: {
+    description: '';
+    displayName: 'Portfolio Hero';
+    icon: 'user';
+  };
+  attributes: {
+    avatar: Schema.Attribute.Media<'images'>;
+    bio: Schema.Attribute.Text;
+    circular_text: Schema.Attribute.Text;
+    name: Schema.Attribute.Text;
+    social_links: Schema.Attribute.Component<'portfolio.social-link', true>;
+    title: Schema.Attribute.Text;
+  };
+}
+
+export interface DynamicZonePortfolioProjects extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_portfolio_projects';
+  info: {
+    description: '';
+    displayName: 'Portfolio Projects';
+    icon: 'stack';
+  };
+  attributes: {
+    heading: Schema.Attribute.Text;
+    kind: Schema.Attribute.Enumeration<['all', 'project', 'side-project']> &
+      Schema.Attribute.DefaultTo<'all'>;
+    portfolios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::portfolio.portfolio'
+    >;
+    sub_heading: Schema.Attribute.Text;
+  };
+}
+
 export interface DynamicZonePricing extends Struct.ComponentSchema {
   collectionName: 'components_dynamic_zone_pricings';
   info: {
@@ -516,6 +568,44 @@ export interface ItemsText extends Struct.ComponentSchema {
   };
   attributes: {
     Position: Schema.Attribute.Text;
+  };
+}
+
+export interface PortfolioParagraph extends Struct.ComponentSchema {
+  collectionName: 'components_portfolio_paragraphs';
+  info: {
+    description: '';
+    displayName: 'Paragraph';
+    icon: 'fileText';
+  };
+  attributes: {
+    text: Schema.Attribute.Text;
+  };
+}
+
+export interface PortfolioSkill extends Struct.ComponentSchema {
+  collectionName: 'components_portfolio_skills';
+  info: {
+    description: '';
+    displayName: 'Skill';
+    icon: 'apps';
+  };
+  attributes: {
+    name: Schema.Attribute.Text;
+  };
+}
+
+export interface PortfolioSocialLink extends Struct.ComponentSchema {
+  collectionName: 'components_portfolio_social_links';
+  info: {
+    description: '';
+    displayName: 'Social Link';
+    icon: 'link';
+  };
+  attributes: {
+    icon: Schema.Attribute.Text;
+    name: Schema.Attribute.Text;
+    url: Schema.Attribute.Text;
   };
 }
 
@@ -795,6 +885,9 @@ declare module '@strapi/strapi' {
       'dynamic-zone.launches': DynamicZoneLaunches;
       'dynamic-zone.media': DynamicZoneMedia;
       'dynamic-zone.plans': DynamicZonePlans;
+      'dynamic-zone.portfolio-about': DynamicZonePortfolioAbout;
+      'dynamic-zone.portfolio-hero': DynamicZonePortfolioHero;
+      'dynamic-zone.portfolio-projects': DynamicZonePortfolioProjects;
       'dynamic-zone.pricing': DynamicZonePricing;
       'dynamic-zone.project-pictures': DynamicZoneProjectPictures;
       'dynamic-zone.promised-land': DynamicZonePromisedLand;
@@ -810,6 +903,9 @@ declare module '@strapi/strapi' {
       'items.left-navbar-items': ItemsLeftNavbarItems;
       'items.ray-items': ItemsRayItems;
       'items.text': ItemsText;
+      'portfolio.paragraph': PortfolioParagraph;
+      'portfolio.skill': PortfolioSkill;
+      'portfolio.social-link': PortfolioSocialLink;
       'shared.button': SharedButton;
       'shared.cons': SharedCons;
       'shared.content': SharedContent;

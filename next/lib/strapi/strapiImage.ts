@@ -10,7 +10,7 @@ export function strapiImage(url: string): string {
       return `https://${document.location.host.replace('client-', 'api-')}${url}`;
     }
 
-    return (base || '') + url;
+    return (base || '').replace(/\/$/, '') + url;
   }
   return url;
 }
